@@ -14,8 +14,8 @@
 ================================================== -->
     <link rel="stylesheet" href="{{ asset('app-assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('app-assets/css/colors/blue.css') }}">
-    <link rel="shortcut icon" href="{{asset('images/icon.png')}}" type="image/x-icon">
-
+    <link rel="shortcut icon" href="{{ asset('images/icon.png') }}" type="image/x-icon">
+    @livewireStyles
 </head>
 
 <body>
@@ -36,7 +36,7 @@
 
                         <!-- Logo -->
                         <div id="logo">
-                            <a href="{{route('home')}}"><img src="{{asset('images/logo.png')}}" alt=""></a>
+                            <a href="{{ route('home') }}"><img src="{{ asset('images/logo.png') }}" alt=""></a>
                         </div>
 
                         <!-- Main Navigation -->
@@ -44,7 +44,7 @@
                             <ul id="responsive">
                                 <li><a href="#">Embauchez </a>
                                     <ul class="dropdown-nav">
-                                        <li><a href="{{route('mission.create')}}">Publier mission</a></li>
+                                        <li><a href="{{ route('mission.create') }}">Publier mission</a></li>
                                         <li><a href="dashboard-post-a-task.html">Publier projet</a></li>
                                         <li><a href="dashboard-post-a-task.html">Codes suivis</a></li>
                                         <li><a href="#">Les freelancers</a>
@@ -88,8 +88,8 @@
                                 @guest
                                     <li><a href="#">Compte</a>
                                         <ul class="dropdown-nav">
-                                            <li><a href="{{route('register')}}">Dévenir freelancer</a></li>
-                                            <li><a href="single-task-page.html">Se connecter</a></li>
+                                            <li><a href="{{ route('register') }}">Dévenir freelancer</a></li>
+                                            <li><a href="{{ route('login') }}">Se connecter</a></li>
                                         </ul>
                                     </li>
                                 @endguest
@@ -101,7 +101,6 @@
 
                     </div>
                     <!-- Left Side Content / End -->
-
 
                     <!-- Right Side Content / End -->
                     <div class="right-side">
@@ -123,7 +122,7 @@
 
                                         <div class="header-notifications-headline">
                                             <h4>Notifications</h4>
-                                            <button class="mark-as-read ripple-effect-dark" title="Mark all as read"
+                                            <button class="mark-as-read ripple-effect-dark" title="tout marquer comme lu"
                                                 data-tippy-placement="left">
                                                 <i class="icon-feather-check-square"></i>
                                             </button>
@@ -198,7 +197,7 @@
 
                                         <div class="header-notifications-headline">
                                             <h4>Messages</h4>
-                                            <button class="mark-as-read ripple-effect-dark" title="Mark all as read"
+                                            <button class="mark-as-read ripple-effect-dark" title="tout marquer comme lu"
                                                 data-tippy-placement="left">
                                                 <i class="icon-feather-check-square"></i>
                                             </button>
@@ -256,8 +255,8 @@
                                         </div>
 
                                         <a href="dashboard-messages.html"
-                                            class="header-notifications-button ripple-effect button-sliding-icon">View All
-                                            Messages<i class="icon-material-outline-arrow-right-alt"></i></a>
+                                            class="header-notifications-button ripple-effect button-sliding-icon">Tous les
+                                            messages<i class="icon-material-outline-arrow-right-alt"></i></a>
                                     </div>
                                 </div>
 
@@ -271,8 +270,9 @@
                                 <div class="header-notifications user-menu">
                                     <div class="header-notifications-trigger">
                                         <a href="#">
-                                            <div class="user-avatar status-online"><img
-                                                    src="images/user-avatar-small-01.jpg" alt=""></div>
+                                            <div class="user-avatar status-online">
+                                                <x-profil-photo />
+                                            </div>
                                         </a>
                                     </div>
 
@@ -284,29 +284,38 @@
 
                                             <!-- User Name / Avatar -->
                                             <div class="user-details">
-                                                <div class="user-avatar status-online"><img
-                                                        src="images/user-avatar-small-01.jpg" alt=""></div>
+                                                <div class="user-avatar status-online">
+                                                    @if (Auth::user()->profil_photo !== null)
+                                                        <img src="{{ asset('storage/profil_photo/' . Auth::user()->profil_photo) }}"
+                                                            alt="Photo de profile de  {{ Auth::user()->name }} sur Freeci">
+                                                    @else
+                                                        <img src="https://ui-avatars.com/api/?name={{ Auth::user()->name }}&background=2A41E8&color=fff"
+                                                            alt="Photo de profile de {{ Auth::user()->name }} sur Freeci">
+                                                    @endif
+                                                </div>
                                                 <div class="user-name">
                                                     Tom Smith <span>Freelancer</span>
                                                 </div>
                                             </div>
 
                                             <!-- User Status Switcher -->
-                                            <div class="status-switch" id="snackbar-user-status">
-                                                <label class="user-online current-status">Online</label>
-                                                <label class="user-invisible">Invisible</label>
-                                                <!-- Status Indicator -->
-                                                <span class="status-indicator" aria-hidden="true"></span>
-                                            </div>
+                                            @livewire('define-freelancer-visibility')
+
                                         </div>
 
                                         <ul class="user-menu-small-nav">
-                                            <li><a href="dashboard.html"><i class="icon-material-outline-dashboard"></i>
+                                            <li><a href="{{ route('dashboard') }}"><i
+                                                        class="icon-material-outline-dashboard"></i>
                                                     Dashboard</a></li>
-                                            <li><a href="dashboard-settings.html"><i
-                                                        class="icon-material-outline-settings"></i> Settings</a></li>
-                                            <li><a href="index-logged-out.html"><i
-                                                        class="icon-material-outline-power-settings-new"></i> Logout</a>
+                                            <li><a href="{{ route('profile.edit') }}"><i
+                                                        class="icon-material-outline-settings"></i> Paramètres</a></li>
+                                            <li>
+                                                <form method="post" action="{{ route('logout') }}">
+                                                    @csrf
+                                                    <button type="submit"><i
+                                                            class="icon-material-outline-power-settings-new"></i>
+                                                        Deconnexion</button>
+                                                </form>
                                             </li>
                                         </ul>
 
@@ -337,10 +346,10 @@
         </header>
         <div class="clearfix"></div>
 
-      
-            @yield('content')
 
-  
+        @yield('content')
+
+
 
 
         <!-- Footer
@@ -360,7 +369,7 @@
                                 <div class="footer-rows-left">
                                     <div class="footer-row">
                                         <div class="footer-row-inner footer-logo">
-                                            <img src="{{asset('images/logo_white.png')}}" alt="">
+                                            <img src="{{ asset('images/logo_white.png') }}" alt="">
                                         </div>
                                     </div>
                                 </div>
@@ -524,9 +533,10 @@
     <script src="{{ asset('app-assets/js/custom.js') }}"></script>
 
 
+
     <script>
         // Snackbar for user status switcher
-        $('#snackbar-user-status label').click(function() {
+        $('.toggle-btn-status').click(function() {
             Snackbar.show({
                 text: 'Your status has been changed!',
                 pos: 'bottom-center',
@@ -559,6 +569,10 @@
             }, 300);
         }
     </script>
+
+
+    @livewireScripts
+
 
     <!-- Google API -->
     <script src="https://maps.googleapis.com/maps/api/js?key=&libraries=places&callback=initAutocomplete"></script>

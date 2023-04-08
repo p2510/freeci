@@ -259,54 +259,74 @@
                 <div class="col-xl-12">
                     <div class="default-slick-carousel freelancers-container freelancers-grid-layout">
 
-                        <!--Freelancer -->
-                        <div class="freelancer">
+                        @foreach ($freelancers as $freelancer)
+                            <!--Freelancer -->
+                            <div class="freelancer">
 
-                            <!-- Overview -->
-                            <div class="freelancer-overview">
-                                <div class="freelancer-overview-inner">
+                                <!-- Overview -->
+                                <div class="freelancer-overview">
+                                    <div class="freelancer-overview-inner">
 
-                                    <!-- Bookmark Icon -->
-                                    <span class="bookmark-icon"></span>
+                                  
+                                        
 
-                                    <!-- Avatar -->
-                                    <div class="freelancer-avatar">
-                                        <div class="verified-badge"></div>
-                                        <a href="single-freelancer-profile.html"><img src="images/user-avatar-big-01.jpg"
-                                                alt=""></a>
-                                    </div>
+                                        <!-- Avatar -->
+                                        <div class="freelancer-avatar">
+                                            <div class="verified-badge"></div>
+                                            <a href="single-freelancer-profile.html">
+                                                @if ($freelancer->profil_photo !== null)
+                                                    <img src="{{ asset('storage/profil_photo/' . $freelancer->profil_photo) }}"
+                                                        alt="" title="{{ $freelancer->name }}"
+                                                        data-tippy-placement="top"
+                                                        alt="Photo de profile de  {{ $freelancer->name }} sur Freeci">
+                                                @else
+                                                    <img src="https://ui-avatars.com/api/?name={{ $freelancer->name }}&background=2A41E8&color=fff"
+                                                        title="{{ $freelancer->name }}"
+                                                        alt="Photo de profile de {{ $freelancer->name }} sur Freeci">
+                                                @endif
+                                            </a>
+                                        </div>
 
-                                    <!-- Name -->
-                                    <div class="freelancer-name">
-                                        <h4><a href="single-freelancer-profile.html">Tom Smith <img class="flag"
-                                                    src="images/flags/gb.svg" alt="" title="United Kingdom"
-                                                    data-tippy-placement="top"></a></h4>
-                                        <span>UI/UX Designer</span>
-                                    </div>
+                                        <!-- Name -->
+                                        <div class="freelancer-name">
+                                            <h4><a href="single-freelancer-profile.html"
+                                                    class="text-capitalize">{{ $freelancer->name }}
+                                                    <img class="flag" src="images/flags/gb.svg" alt=""
+                                                        title="United Kingdom" data-tippy-placement="top">
+                                                </a></h4>
+                                            <span>{{ $freelancer->job }}</span>
+                                        </div>
 
-                                    <!-- Rating -->
-                                    <div class="freelancer-rating">
-                                        <div class="star-rating" data-rating="5.0"></div>
+                                        <!-- Rating -->
+                                        <div class="freelancer-rating">
+                                            <div class="star-rating" data-rating="5.0"></div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <!-- Details -->
-                            <div class="freelancer-details">
-                                <div class="freelancer-details-list">
-                                    <ul>
-                                        <li>Ville <strong><i class="icon-material-outline-location-on"></i> London</strong>
-                                        </li>
-                                        <li>Tarif <strong>60 f / J</strong></li>
-                                        <li>Réalisé <strong>95</strong></li>
-                                    </ul>
+                                <!-- Details -->
+                                <div class="freelancer-details">
+                                    <div class="freelancer-details-list">
+                                        <ul>
+                                            <li>Disponible <strong><i class="icon-material-outline-location-on"></i>
+                                                    @if ($freelancer->visibility)
+                                                    Oui
+                                                    @else
+                                                    Non
+                                                    @endif 
+                                                </strong>
+                                            </li>
+                                            <li>Tarif <strong>{{ $freelancer->tjm }} f / J</strong></li>
+                                            <li>Certifié <strong class="paid " style="color:white;">Expert </strong></li>
+                                        </ul>
+                                    </div>
+                                    <a href="{{ route('freelancer.show', $freelancer->name) }}"
+                                        class="button button-sliding-icon ripple-effect">Voir profil<i
+                                            class="icon-material-outline-arrow-right-alt"></i></a>
                                 </div>
-                                <a href="single-freelancer-profile.html"
-                                    class="button button-sliding-icon ripple-effect">Voir profil<i
-                                        class="icon-material-outline-arrow-right-alt"></i></a>
                             </div>
-                        </div>
-                        <!-- Freelancer / End -->
+                            <!-- Freelancer / End -->
+                        @endforeach
                     </div>
                 </div>
 
@@ -317,29 +337,30 @@
     <div class="section padding-top-60 padding-bottom-75">
         <div class="container">
             <div class="row">
-    
+
                 <div class="col-xl-12">
                     <!-- Section Headline -->
                     <div class="section-headline centered margin-top-0 margin-bottom-35">
                         <h3>Devenir Freelancer</h3>
                     </div>
                 </div>
-    
-    
+
+
                 <div class="col-xl-12">
-    
+
                     <!-- Billing Cycle  -->
                     <div class="billing-cycle-radios margin-bottom-70">
-                       
+
                     </div>
-    
+
                     <!-- Pricing Plans Container -->
                     <div class="pricing-plans-container">
-    
+
                         <!-- Plan -->
                         <div class="pricing-plan">
                             <h3>Basic </h3>
-                            <p class="margin-top-10">Vous commençez en freelance et vous souhaitez essayer , ce pack est pour vous.</p>
+                            <p class="margin-top-10">Vous commençez en freelance et vous souhaitez essayer , ce pack est
+                                pour vous.</p>
                             <div class="pricing-plan-label billed-monthly-label"><strong>1.000 F</strong></div>
                             <div class="pricing-plan-features">
                                 <strong>Fonctionnalité du plan Basic</strong>
@@ -348,28 +369,29 @@
                                     <li>Voir les autres dévis</li>
                                 </ul>
                             </div>
-                            <a href="pages-checkout-page.html" class="button full-width margin-top-20">Acheter</a>
+                            <a href="{{route('subscription.create','basic')}}" class="button full-width margin-top-20">Acheter</a>
                         </div>
-    
+
                         <!-- Plan -->
                         <div class="pricing-plan recommended">
                             <div class="recommended-badge">Recommandé</div>
                             <h3>Pro</h3>
-                            <p class="margin-top-10">Vous avez de l'expérience et vous souhaitez vous mettre dans les meilleures rangées  </p>
+                            <p class="margin-top-10">Vous avez de l'expérience et vous souhaitez vous mettre dans les
+                                meilleures rangées </p>
                             <div class="pricing-plan-label billed-monthly-label"><strong>3.000 F</strong></div>
                             <div class="pricing-plan-features">
                                 <strong>Fonctionnalité du plan Pro</strong>
                                 <ul class="list-2">
                                     <li>8 Devis</li>
                                     <li>Badge Pro</li>
-                                    <li>Alert email</li>
                                     <li>Contact recruteur</li>
                                     <li>Voir les autres dévis</li>
+                                    <li>Notifications par email</li>
                                 </ul>
                             </div>
-                            <a href="pages-checkout-page.html" class="button full-width margin-top-20">Acheter</a>
+                            <a href="{{route('subscription.create','pro')}}" class="button full-width margin-top-20">Acheter</a>
                         </div>
-    
+
                         <!-- Plan -->
                         <div class="pricing-plan">
                             <h3>Expert</h3>
@@ -380,22 +402,25 @@
                                 <ul class="list-2">
                                     <li>15 Devis</li>
                                     <li>Badge Expert</li>
-                                    <li>Alert email</li>
                                     <li>Contact recruteur</li>
                                     <li>Missions exclusives</li>
                                     <li>Voir les autres dévis</li>
+                                    <li>Notifications par SMS</li>
+                                    <li>Notifications par email</li>
                                     <li>Bonus du pack : publicité</li>
 
                                 </ul>
                             </div>
-                            <a href="pages-checkout-page.html" class="button full-width margin-top-20">Acheter</a>
+                            <a href="{{route('subscription.create','expert')}}" class="button full-width margin-top-20">Acheter</a>
                         </div>
-                        
+
                     </div>
-    
+
                 </div>
-    
+
             </div>
         </div>
     </div>
+
+
 @endsection
