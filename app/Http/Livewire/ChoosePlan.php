@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Http\Utils\PayTech;
+use Illuminate\Support\Facades\Auth;
 
 
 class ChoosePlan extends Component
@@ -27,9 +28,9 @@ class ChoosePlan extends Component
             $this->plan='basic';
             $this->plan_selected='basic';
         } elseif($plan=='pro') {
-            $this->price=3000 ;
+            $this->price=5000 ;
         }else{
-            $this->price=10000 ;
+            $this->price=8000 ;
         }
     }
     public function choosePlan(string|null $newPlan)
@@ -40,10 +41,10 @@ class ChoosePlan extends Component
             $this->price=1000 ;
             
         } elseif($newPlan=='pro') {
-            $this->price=3000 ;
+            $this->price=5000 ;
         
         }else{
-            $this->price=10000 ;
+            $this->price=8000 ;
         }
        
     }
@@ -75,7 +76,7 @@ class ChoosePlan extends Component
         );//object//object
         
         $BASE_URL  = 'https://yatachi-code.org';
-        $id=5;
+        $id=uniqid();
         $jsonResponse = (new PayTech(env('PAYTECH_API_KEY'),env('PAYTECH_SECRET_KEY')))->setQuery([
                 'item_name' => $item['name'],
                 'item_price' => $item['price'],
@@ -86,6 +87,8 @@ class ChoosePlan extends Component
                 'time_command' => time(),
                 'ip_user' => $_SERVER['REMOTE_ADDR'],
                 'lang' => 'reset',
+                'user_id'=>Auth::user()->id,
+                
                 
             ])
                 ->setTestMode(true)
@@ -94,7 +97,7 @@ class ChoosePlan extends Component
                 ->setNotificationUrl([
                     'ipn_url' =>     $BASE_URL.'/ipn.php', //only https
                     'success_url' => $BASE_URL.'/ipn.php',//route('ipn.success'),
-                    'cancel_url' =>  $BASE_URL.'/ipn.php'//route('subscription.create'),
+                    'cancel_url' =>  route('subscription.create')//route('subscription.create'),
                 ])->send();
             
             redirect($jsonResponse['redirect_url']);

@@ -36,9 +36,16 @@
                                                 Indisponible
                                             @endif
                                         </li>
+                                        @if ($item->plan)
+
                                         <li>
-                                            <div class="verified-badge-with-title">Expert</div>
+                                            @if($item->plan=='pro')
+                                            <div style="color:white;text-transform:capitalize;background-color:#febe42;text-align:center; padding-left:6px;padding-right:6px;">{{ $item->plan}}</div>
+                                            @elseif ($item->plan=='expert')
+                                            <div  style="color:white;text-transform:capitalize;background-color:#38b653;text-align:center;padding-left:6px;padding-right:6px;">{{ $item->plan}}</div>
+                                            @endif
                                         </li>
+                                        @endif
                                     </ul>
                                 </div>
                             </div>

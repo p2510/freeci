@@ -9,7 +9,6 @@
     <title>@yield('title')</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
     <!-- CSS
 ================================================== -->
     <link rel="stylesheet" href="{{ asset('app-assets/css/style.css') }}">
@@ -48,23 +47,22 @@
                                     <ul class="dropdown-nav">
                                         <li><a href="{{ route('mission.create') }}">Publier mission</a></li>
                                         <li><a href="dashboard-post-a-task.html">Publier projet</a></li>
-                                        <li><a href="dashboard-post-a-task.html">Codes suivis</a></li>
-                                        <li><a href="#">Les freelancers</a>
+                                        <li><a href="{{route('follow.search')}}">Codes suivis</a></li>
+                                        <li><a href="{{route('freelancer.index')}}">Les freelancers</a>
                                             <ul class="dropdown-nav">
-                                                <li><a href="freelancers-list-layout-1.html">En ligne</a></li>
-                                                <li><a href="freelancers-list-layout-2.html">Les mieux notés</a></li>
-                                                <li><a href="freelancers-list-layout-1.html">les nouveaux</a></li>
+                                                <li><a href="{{route('freelancer.online')}}">En ligne</a></li>
+                                                <li><a href="{{route('freelancer.new')}}">les nouveaux</a></li>
                                             </ul>
                                         </li>
                                     </ul>
                                 </li>
                                 <li><a href="#">Trouver des emplois</a>
                                     <ul class="dropdown-nav">
-                                        <li><a href="single-job-page.html">Missions</a></li>
+                                        <li><a href="{{ route('mission.index') }}">Missions</a></li>
                                         <li><a href="single-task-page.html">Grands projets</a></li>
                                         <li><a href="#">Recherche par</a>
                                             <ul class="dropdown-nav">
-                                                <li><a href="tasks-list-layout-1.html">Plus récents</a></li>
+                                                <li><a href="{{route('mission.recent')}}">Plus récents</a></li>
                                                 <li><a href="tasks-grid-layout.html">En vedette</a></li>
                                             </ul>
                                         </li>
@@ -302,10 +300,10 @@
                                             </div>
 
                                             <!-- User Status Switcher -->
-                                            
+
 
                                             @livewire('define-freelancer-visibility')
-                                           
+
                                         </div>
 
                                         <ul class="user-menu-small-nav">
@@ -369,38 +367,40 @@
                             <div class="dashboard-nav-inner">
 
                                 <ul data-submenu-title="Démarrer">
-                                    <li @if (Route::currentRouteName()=='dashboard') class="active" @endif><a href="{{ route('dashboard') }}"><i
+                                    <li @if (Route::currentRouteName() == 'dashboard') class="active" @endif><a
+                                            href="{{ route('dashboard') }}"><i
                                                 class="icon-material-outline-dashboard"></i>
                                             Dashboard</a></li>
-                                    <li><a href="dashboard-messages.html"><i
+                                    <li @if (Route::currentRouteName() == 'message.index.freelancer') class="active" @endif><a href="{{route('message.index.freelancer')}}"><i
                                                 class="icon-material-outline-question-answer"></i>
-                                            Messages <span class="nav-tag">2</span></a></li>
-                                    <li><a href="dashboard-bookmarks.html"><i
-                                                class="icon-material-outline-star-border"></i>
-                                            Favoris</a></li>
+                                            Messagerie</a></li>
+                           
                                     <li><a href="dashboard-reviews.html"><i
                                                 class="icon-material-outline-rate-review"></i>
                                             Commentaire</a></li>
                                 </ul>
 
                                 <ul data-submenu-title="Organiser et gérer">
-                                    <li><a href="#"><i class="icon-material-outline-business-center"></i>
+                                    <li @if (Route::currentRouteName() == 'applicant.mission.index') class="active" @endif><a href="#"><i class="icon-material-outline-business-center"></i>
                                             Archive</a>
                                         <ul>
-                                            <li><a href="dashboard-manage-jobs.html">Missions <span
+                                            <li><a href="{{route('applicant.mission.index')}}">Missions <span
                                                         class="nav-tag">3</span></a></li>
                                             <li><a href="dashboard-manage-candidates.html">Grands projets</a></li>
                                         </ul>
                                     </li>
-                                    <li @if (Route::currentRouteName()=='subscription.create') class="active" @endif><a href="#"><i class="icon-material-outline-assignment"></i> Achat</a>
+                                    <li @if (Route::currentRouteName() == 'subscription.create') class="active" @endif><a href="#"><i
+                                                class="icon-material-outline-assignment"></i> Achat</a>
                                         <ul>
-                                            <li  @if (Route::currentRouteName()=='subscription.create') class="active" @endif><a href="{{route('subscription.create')}}">Abonnement</a></li>
-                                            <li><a href="dashboard-post-a-task.html">Factures</a></li>
+                                            <li @if (Route::currentRouteName() == 'subscription.create') class="active" @endif><a
+                                                    href="{{ route('subscription.create') }}">Abonnement</a></li>
+                                            <li><a href="dashboard-post-a-task.html">Règlements</a></li>
                                         </ul>
                                     </li>
                                 </ul>
                                 <ul data-submenu-title="Compte">
-                                    <li  @if (Route::currentRouteName()=='profile.edit') class="active" @endif><a href="{{ route('profile.edit') }}"><i
+                                    <li @if (Route::currentRouteName() == 'profile.edit') class="active" @endif><a
+                                            href="{{ route('profile.edit') }}"><i
                                                 class="icon-material-outline-settings"></i>
                                             Paramètre</a></li>
 
@@ -646,6 +646,11 @@
 
     <!-- Google API -->
     <script src="https://maps.googleapis.com/maps/api/js?key=&libraries=places&callback=initAutocomplete"></script>
+
+    <!-- Chart.js // documentation: http://www.chartjs.org/docs/latest/ -->
+   
+
+
 
 </body>
 

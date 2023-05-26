@@ -17,7 +17,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function create(): View
     {
-        return view('freelancer.auth.login');
+        return view('pages.freelancer.auth.login');
     }
 
     /**

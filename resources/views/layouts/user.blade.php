@@ -10,6 +10,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
+    @yield('addTailwind')
+
     <!-- CSS
 ================================================== -->
     <link rel="stylesheet" href="{{ asset('app-assets/css/style.css') }}">
@@ -46,23 +48,22 @@
                                     <ul class="dropdown-nav">
                                         <li><a href="{{ route('mission.create') }}">Publier mission</a></li>
                                         <li><a href="dashboard-post-a-task.html">Publier projet</a></li>
-                                        <li><a href="dashboard-post-a-task.html">Codes suivis</a></li>
-                                        <li><a href="#">Les freelancers</a>
+                                        <li><a href="{{route('follow.search')}}">Codes suivis</a></li>
+                                        <li><a href="{{route('freelancer.index')}}">Les freelancers</a>
                                             <ul class="dropdown-nav">
-                                                <li><a href="freelancers-list-layout-1.html">En ligne</a></li>
-                                                <li><a href="freelancers-list-layout-2.html">Les mieux notés</a></li>
-                                                <li><a href="freelancers-list-layout-1.html">les nouveaux</a></li>
+                                                <li><a href="{{route('freelancer.online')}}">En ligne</a></li>
+                                                <li><a href="{{route('freelancer.new')}}">les nouveaux</a></li>
                                             </ul>
                                         </li>
                                     </ul>
                                 </li>
                                 <li><a href="#">Trouver des emplois</a>
                                     <ul class="dropdown-nav">
-                                        <li><a href="single-job-page.html">Missions</a></li>
+                                        <li><a href="{{ route('mission.index') }}">Missions</a></li>
                                         <li><a href="single-task-page.html">Grands projets</a></li>
                                         <li><a href="#">Recherche par</a>
                                             <ul class="dropdown-nav">
-                                                <li><a href="tasks-list-layout-1.html">Plus récents</a></li>
+                                                <li><a href="{{route('mission.recent')}}">Plus récents</a></li>
                                                 <li><a href="tasks-grid-layout.html">En vedette</a></li>
                                             </ul>
                                         </li>
@@ -93,7 +94,7 @@
                                         </ul>
                                     </li>
                                 @endguest
-                                <a href="#" class=" button ripple-effect">Publier une mission</a>
+                                <a href="{{ route('mission.create') }}" class=" button ripple-effect">Publier une mission</a>
                             </ul>
                         </nav>
                         <div class="clearfix"></div>
@@ -538,7 +539,7 @@
         // Snackbar for user status switcher
         $('.toggle-btn-status').click(function() {
             Snackbar.show({
-                text: 'Your status has been changed!',
+                text: 'Votre status a été changé!',
                 pos: 'bottom-center',
                 showAction: false,
                 actionText: "Dismiss",

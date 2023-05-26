@@ -21,7 +21,7 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
-        return view('freelancer.auth.edit', [
+        return view('pages.freelancer.auth.edit', [
             'user' => $request->user(),
             'freelancer_information' => FreelancerInformation::find(Auth::user()->id),
             'domain'=>Listing::Domain()

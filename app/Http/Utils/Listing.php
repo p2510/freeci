@@ -20,6 +20,7 @@ class Listing
         "Communication digital",
         "Comptabilité - Gestion",
         "Culture - Spectacle",
+        "Data - Analyse",
         "Droit - Justice",
         "Édition - Imprimerie",
         "Électicité - Électronique",

@@ -30,7 +30,7 @@
                     <label for="radio-6"><span class="radio-label"></span>
                         Plan pro
                         <span class="billing-cycle-details">
-                            <span class="discounted-price-tag">3.000 F</span>
+                            <span class="discounted-price-tag">5.000 F</span>
                         </span>
                     </label>
                 </div>
@@ -44,7 +44,7 @@
                     <label for="radio-7"><span class="radio-label"></span>
                         Plan expert
                         <span class="billing-cycle-details">
-                            <span class="discounted-price-tag">10.000 F </span>
+                            <span class="discounted-price-tag">8.000 F </span>
                         </span>
                     </label>
                 </div>
@@ -99,8 +99,13 @@
             </div>
             <!-- Payment Methods Accordion / End -->
 
+            @if ($payment_type == 'money')
             <button type="submit" class="button big ripple-effect margin-top-40 margin-bottom-65">Procéder au
                 paiement</button>
+            @else 
+            <a href="{{route('cash.code')}}" class="button big ripple-effect margin-top-40 margin-bottom-65">Saisir le code</a>
+            @endif
+        
         </div>
 
 
@@ -132,5 +137,6 @@
 
             </div>
         </div>
+        
     </div>
 </form>

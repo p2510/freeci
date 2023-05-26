@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\View;
+use App\Http\Utils\Listing;
 use App\Models\Recommended;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 class FreelancerController extends Controller
 {
@@ -13,7 +17,43 @@ class FreelancerController extends Controller
      */
     public function index()
     {
-        //
+        return view('pages.user.freelancer-index')->with([
+            'categories'=>Listing::domain(),
+            'freelancers'=>DB::table('users')
+                           ->join('freelancer_information','freelancer_information.user_id','=','users.id')
+                           ->select('users.*','freelancer_information.*')
+                           ->orderBy('users.created_at','desc')
+                           ->paginate(6),
+        ]);
+    }
+    public function onlineFreelancer()
+    {
+ 
+        return view('pages.search.freelancer-by-online')->with([
+            'categories'=>Listing::domain(),
+            'freelancers'=>DB::table('users')
+                           ->where('visibility',1)
+                           ->join('freelancer_information','freelancer_information.user_id','=','users.id')
+                           ->select('users.*','freelancer_information.*')
+                           ->orderBy('users.created_at','desc')
+                           ->paginate(6),
+        ]);
+    }
+    public function newFreelancer()
+    {
+ 
+       
+       
+        return view('pages.search.freelancer-by-new')->with([
+            'categories'=>Listing::domain(),
+            'freelancers'=>DB::table('users')
+            ->where('visibility',1)
+            ->join('freelancer_information','freelancer_information.user_id','=','users.id')
+            ->select('users.*','freelancer_information.*')
+            ->latest('users.created_at')
+            ->limit(12)
+            ->get(),
+        ]);
     }
 
     /**
@@ -35,18 +75,27 @@ class FreelancerController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(User $user)
+    public function show(User $user,Request $request)
     {
         $freelancer=$user::where('users.id',$user->id)
                    ->join('freelancer_information','freelancer_information.user_id','=','users.id')
-                   ->select('users.*','freelancer_information.*')
+                   ->leftjoin('subscriptions','subscriptions.user_id','=','users.id')
+                   ->select('users.*','freelancer_information.*','subscriptions.plan')
                    ->get()->map(function($item){
                     $item->skills=explode(',',$item->skills);
                     return $item;
                    }); 
         $countRecommended=Recommended::where('user_id',$user->id)->count();
-                     
-        return view('freelancer.show')->with([
+        // add views 
+        $getViews=View::where('ip',$request->ip())->where('user_id',$user->id)->count();
+        if ($getViews==0) {
+            $view = View::create([
+                'user_id'=> $user->id,
+                'ip'=>$request->ip()
+            ]);
+        }
+                   
+        return view('pages.user.freelancer-show')->with([
             'freelancer'=>$freelancer,
             'countRecommended'=>$countRecommended
         ]);

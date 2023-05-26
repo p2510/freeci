@@ -4,7 +4,10 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Carbon\Carbon;
+use App\Models\View;
+use App\Models\Message;
 use App\Models\Recommended;
+use App\Models\Subscription;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\FreelancerInformation;
 use Illuminate\Notifications\Notifiable;
@@ -81,5 +84,35 @@ class User extends Authenticatable
     public function recommendeds(): HasMany
     {
         return $this->hasMany(Recommended::class, 'user_id', 'id');
+    }
+
+    /**
+     * Get the subscription associated with the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function subscription(): HasOne
+    {
+        return $this->hasOne(Subscription::class, 'user_id', 'id');
+    }
+
+    /**
+     * Get the views associated with the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function views(): HasMany
+    {
+        return $this->hasMany(View::class, 'user_id', 'id');
+    }
+
+    /**
+     * Get all of the messages for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function messages(): HasMany
+    {
+        return $this->hasMany(Message::class, 'user_id', 'id');
     }
 }

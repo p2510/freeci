@@ -6,13 +6,13 @@
     <div class="dashboard-container">
 
         <!-- Dashboard Sidebar
-                                                                                                                 ================================================== -->
+                                                                                                                     ================================================== -->
 
         <!-- Dashboard Sidebar / End -->
 
 
         <!-- Dashboard Content
-                                                                                                                 ================================================== -->
+                                                                                                                     ================================================== -->
         <div class="dashboard-content-container" data-simplebar>
             <div class="dashboard-content-inner">
 
@@ -26,7 +26,7 @@
                         <x-alert-success message="Votre profil a   été mis à jour avec succès " />
                     @endif
                     @if (session('status') === 'password-updated')
-                    <x-alert-success message="Mot de passe modifié " />
+                        <x-alert-success message="Mot de passe modifié " />
 
                     @endif
 
@@ -338,13 +338,14 @@
                                     <div class="col-xl-4">
                                         <div class="submit-field">
                                             <h5>Confirmer le mot de passe</h5>
-                                            <input type="password" class="with-border" name="password_confirmation" required>
+                                            <input type="password" class="with-border" name="password_confirmation"
+                                                required>
                                             <x-input-error :messages="$errors->updatePassword->get('password_confirmation')" class="mt-2" />
 
                                         </div>
                                     </div>
 
-                                    
+
                                 </div>
                                 <!-- Button -->
                                 <div class="col-xl-12">
