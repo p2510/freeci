@@ -86,6 +86,7 @@ class MessageController extends Controller
       $validate['author']='recrutor';
       
       Message::create($validate);
+
       return redirect()->back();
       
     }
@@ -98,8 +99,10 @@ class MessageController extends Controller
         'content'=>['required','string'],
       ]);
       $validate['author']='freelancer';
-      
+ 
       Message::create($validate);
+     
+     
       return redirect()->back();
       
     }

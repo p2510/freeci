@@ -63,7 +63,7 @@
                                         <li><a href="#">Recherche par</a>
                                             <ul class="dropdown-nav">
                                                 <li><a href="{{route('mission.recent')}}">Plus récents</a></li>
-                                                <li><a href="tasks-grid-layout.html">En vedette</a></li>
+                                                <li><a href="{{route('mission.featured')}}">En vedette</a></li>
                                             </ul>
                                         </li>
                                     </ul>
@@ -422,7 +422,7 @@
 
         </div>
 
-
+       
 
 
         <!-- Footer
@@ -643,6 +643,7 @@
     </script>
     @livewireScripts
 
+    
 
     <!-- Google API -->
     <script src="https://maps.googleapis.com/maps/api/js?key=&libraries=places&callback=initAutocomplete"></script>

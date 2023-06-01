@@ -34,7 +34,6 @@ class MissionController extends Controller
             'skill'=>[]
         ]);
 
-        
        if($validate['category']=='All'){
             $data=Mission::where('tags','LIKE', '%'.$validate['skill'].'%')->paginate(9);
         }else{            
@@ -50,13 +49,21 @@ class MissionController extends Controller
     public function recent()
     {
 
-        return view('pages.user.mission-.recent')->with([
+        return view('pages.user.mission-recent')->with([
             'categories'=>Listing::domain(),
             'missions'=>Mission::orderBy('created_at','desc')->limit(16)->get(),
  
         ]);
     }
-
+    public function featured()
+    {
+   
+        return view('pages.user.mission-featured')->with([
+            'categories'=>Listing::domain(),
+            'missions'=>Mission::orderBy('budget_max','desc')->limit(16)->get()
+ 
+        ]);
+    }
     /**
      * Show the form for creating a new resource.
      */

@@ -30,6 +30,7 @@ Route::prefix('/mission')->group(function () {
     Route::get('/', [MissionController::class, 'index'])->name('mission.index');
     Route::post('/recherche', [MissionController::class, 'search'])->name('mission.search');
     Route::get('/plus-récents', [MissionController::class, 'recent'])->name('mission.recent');
+    Route::get('/en-vedette', [MissionController::class, 'featured'])->name('mission.featured');
     Route::get('/publier', [MissionController::class, 'create'])->name('mission.create');
     Route::post('/publier', [MissionController::class, 'store'])->name('mission.store');
     Route::middleware('auth')->group(function () {
@@ -92,10 +93,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/code-de-validation', [SubscriptionController::class, 'cash_code'])->name('cash.code');
     Route::post('/code-de-validation', [SubscriptionController::class, 'cash_code_validation'])->name('cash.code.validation');
   
-    
-
 });
-
 
 
 

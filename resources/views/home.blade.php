@@ -6,7 +6,7 @@
     <!-- add class "disable-gradient" to enable consistent background overlay -->
     <div class="intro-banner" data-background-image="{{ asset('images/home-background.jpg') }}">
         <div class="container">
-
+            
             <!-- Intro Headline -->
             <div class="row">
                 <div class="col-md-12">
@@ -38,7 +38,7 @@
                         <!-- Search Field -->
                         <div class="intro-search-field">
                             <label for="intro-keywords" class="field-title ripple-effect">Trouver une mission ?</label>
-                            <input id="intro-keywords" type="text" placeholder="Titre de mission or mot clé">
+                            <input id="intro-keywords" type="text" placeholder="Titre de mission ou mot clé">
                         </div>
 
                         <!-- Button -->

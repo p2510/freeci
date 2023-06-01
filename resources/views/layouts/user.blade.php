@@ -64,7 +64,7 @@
                                         <li><a href="#">Recherche par</a>
                                             <ul class="dropdown-nav">
                                                 <li><a href="{{route('mission.recent')}}">Plus récents</a></li>
-                                                <li><a href="tasks-grid-layout.html">En vedette</a></li>
+                                                <li><a href="{{route('mission.featured')}}">En vedette</a></li>
                                             </ul>
                                         </li>
                                     </ul>
@@ -532,6 +532,7 @@
     <script src="{{ asset('app-assets/js/magnific-popup.min.js') }}"></script>
     <script src="{{ asset('app-assets/js/slick.min.js') }}"></script>
     <script src="{{ asset('app-assets/js/custom.js') }}"></script>
+  
 
 
 
@@ -573,6 +574,7 @@
 
 
     @livewireScripts
+
 
 
     <!-- Google API -->

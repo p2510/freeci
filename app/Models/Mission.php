@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use App\Models\Message;
+use Laravel\Scout\Searchable;
 use App\Models\MissionApplicant;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -12,7 +13,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Mission extends Model
 {
-    use HasFactory;
+    use HasFactory , Searchable;
     protected $fillable=[
         'title','type_mission','type_budget','category','budget_min','budget_max','tags','description','code','phone','statut'
     ];
@@ -53,4 +54,13 @@ class Mission extends Model
          
         );
     }
+
+    public function toSearchableArray():array
+        {
+            return [
+                'title' => (string) $this->title,
+                'category' =>(string) $this->category,
+                'tags' => (string) $this->tags,
+            ];
+        }
 }
