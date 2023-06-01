@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Carbon\Carbon;
 use App\Models\View;
+use App\Models\Review;
 use App\Models\Message;
 use App\Models\Recommended;
 use App\Models\Subscription;
@@ -114,5 +115,15 @@ class User extends Authenticatable
     public function messages(): HasMany
     {
         return $this->hasMany(Message::class, 'user_id', 'id');
+    }
+
+    /**
+     * Get all of the rewviews for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function rewviews(): HasMany
+    {
+        return $this->hasMany(Review::class, 'user_id', 'id');
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Mission;
+use App\Http\Utils\Listing;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -32,6 +33,20 @@ class HomeController extends Controller
         return view('home')->with([
             'freelancers'=>$freelancers,
             'missions'=>$missions,
+        ]);
+    }
+    
+    
+    public function search(Request $request)
+    {
+        $missions=Mission::where('title','LIKE','%'.$request->search.'%')->orWhere('category','LIKE','%'.$request->search.'%')->paginate(9);
+        if(count($missions)===0 || !$request->filled('search')){
+            return redirect()->route('mission.index');
+        }
+            
+        return view('pages.search.home-search')->with([
+           'categories'=>Listing::domain(),
+           'missions'=>$missions,
         ]);
     }
 }

@@ -5,8 +5,10 @@
     @endforeach
 @endsection
 @section('content')
+    <!-- alert success -->
+
     <!-- Titlebar
-                        ================================================== -->
+                                                        ================================================== -->
     @foreach ($freelancer as $item)
         <div class="single-page-header freelancer-header" data-background-image="images/single-freelancer.jpg">
             <div class="container">
@@ -27,7 +29,7 @@
                                     <h3>{{ $item->name }} <span>{{ $item->job }}</span></h3>
                                     <ul>
                                         <li>
-                                            <div class="star-rating" data-rating="{{$countRecommended}}"></div>
+                                            <div class="star-rating" data-rating="{{ $countRecommended }}"></div>
                                         </li>
                                         <li>
                                             @if ($item->visibility)
@@ -37,14 +39,17 @@
                                             @endif
                                         </li>
                                         @if ($item->plan)
-
-                                        <li>
-                                            @if($item->plan=='pro')
-                                            <div style="color:white;text-transform:capitalize;background-color:#febe42;text-align:center; padding-left:6px;padding-right:6px;">{{ $item->plan}}</div>
-                                            @elseif ($item->plan=='expert')
-                                            <div  style="color:white;text-transform:capitalize;background-color:#38b653;text-align:center;padding-left:6px;padding-right:6px;">{{ $item->plan}}</div>
-                                            @endif
-                                        </li>
+                                            <li>
+                                                @if ($item->plan == 'pro')
+                                                    <div
+                                                        style="color:white;text-transform:capitalize;background-color:#febe42;text-align:center; padding-left:6px;padding-right:6px;">
+                                                        {{ $item->plan }}</div>
+                                                @elseif ($item->plan == 'expert')
+                                                    <div
+                                                        style="color:white;text-transform:capitalize;background-color:#38b653;text-align:center;padding-left:6px;padding-right:6px;">
+                                                        {{ $item->plan }}</div>
+                                                @endif
+                                            </li>
                                         @endif
                                     </ul>
                                 </div>
@@ -55,10 +60,15 @@
             </div>
         </div>
 
-
+        @if (session('success'))
+            <x-alert-success message="Félicitation !! Vous avez ajouté un nouveau  commentaire . " />
+        @endif
+        @if ($errors->any())
+            <x-alert-danger message="Erreur , renseignez à nouveau les informations du commentaire" />
+        @endif
 
         <!-- Page Content
-                        ================================================== -->
+                                                        ================================================== -->
         <div class="container">
             <div class="row">
 
@@ -74,155 +84,50 @@
                     <!-- Boxed List -->
                     <div class="boxed-list margin-bottom-60">
                         <div class="boxed-list-headline">
-                            <h3><i class="icon-material-outline-thumb-up"></i> Quelques avis </h3>
+                            <h3><i class="icon-material-outline-thumb-up"></i>Les trois(3) derniers commentaires </h3>
                         </div>
                         <ul class="boxed-list-ul">
-                            <li>
-                                <div class="boxed-list-item">
-                                    <!-- Content -->
-                                    <div class="item-content">
-                                        <h4>Web, Database and API Developer <span>Rated as Freelancer</span></h4>
-                                        <div class="item-details margin-top-10">
-                                            <div class="star-rating" data-rating="5.0"></div>
-                                            <div class="detail-item"><i class="icon-material-outline-date-range"></i> August
-                                                2019</div>
-                                        </div>
-                                        <div class="item-description">
-                                            <p>Excellent programmer - fully carried out my project in a very professional
-                                                manner. </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="boxed-list-item">
-                                    <!-- Content -->
-                                    <div class="item-content">
-                                        <h4>WordPress Theme Installation <span>Rated as Freelancer</span></h4>
-                                        <div class="item-details margin-top-10">
-                                            <div class="star-rating" data-rating="5.0"></div>
-                                            <div class="detail-item"><i class="icon-material-outline-date-range"></i> June
-                                                2019
+                            @foreach ($reviews as $review)
+                                <li>
+                                    <div class="boxed-list-item">
+                                        <!-- Content -->
+                                        <div class="boxed-list-item">
+                                            <!-- Content -->
+                                            <div class="item-content">
+                                                <h4>{{ $review->title }}
+                                                    <span>
+                                                        Par
+                                                        @if ($review->name)
+                                                            {{ $review->name }}
+                                                        @else
+                                                        un anonyme
+                                                        @endif
+                                                    </span>
+                                                </h4>
+                                                <div class="item-details margin-top-10">
+                                                    <div class="star-rating" data-rating="{{ $review->rating }}"></div>
+                                                    <div class="detail-item"><i
+                                                            class="icon-material-outline-date-range"></i>
+                                                        {{ $review->created_at }}</div>
+                                                </div>
+                                                <div class="item-description">
+                                                    <p>{{ $review->message }} </p>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="boxed-list-item">
-                                    <!-- Content -->
-                                    <div class="item-content">
-                                        <h4>Fix Python Selenium Code <span>Rated as Employer</span></h4>
-                                        <div class="item-details margin-top-10">
-                                            <div class="star-rating" data-rating="5.0"></div>
-                                            <div class="detail-item"><i class="icon-material-outline-date-range"></i> May
-                                                2019
-                                            </div>
-                                        </div>
-                                        <div class="item-description">
-                                            <p>I was extremely impressed with the quality of work AND how quickly he got it
-                                                done. He then offered to help with another side part of the project that we
-                                                didn't even think about originally.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="boxed-list-item">
-                                    <!-- Content -->
-                                    <div class="item-content">
-                                        <h4>PHP Core Website Fixes <span>Rated as Freelancer</span></h4>
-                                        <div class="item-details margin-top-10">
-                                            <div class="star-rating" data-rating="5.0"></div>
-                                            <div class="detail-item"><i class="icon-material-outline-date-range"></i> May
-                                                2019
-                                            </div>
-                                        </div>
-                                        <div class="item-description">
-                                            <p>Awesome work, definitely will rehire. Poject was completed not only with the
-                                                requirements, but on time, within our small budget.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
 
-                        <!-- Pagination -->
-                        <div class="clearfix"></div>
-                        <div class="pagination-container margin-top-40 margin-bottom-10">
-                            <nav class="pagination">
-                                <ul>
-                                    <li><a href="#" class="ripple-effect current-page">1</a></li>
-                                    <li><a href="#" class="ripple-effect">2</a></li>
-                                    <li class="pagination-arrow"><a href="#" class="ripple-effect"><i
-                                                class="icon-material-outline-keyboard-arrow-right"></i></a></li>
-                                </ul>
-                            </nav>
-                        </div>
-                        <div class="clearfix"></div>
-                        <!-- Pagination / End -->
+                                    </div>
+                                </li>
+                            @endforeach
+
+
+                        </ul>
+                 
+
 
                     </div>
                     <!-- Boxed List / End -->
 
-                    <!-- Boxed List -->
-                    <div class="boxed-list margin-bottom-60">
-                        <div class="boxed-list-headline">
-                            <h3><i class="icon-material-outline-business"></i> Missions précédentes</h3>
-                        </div>
-                        <ul class="boxed-list-ul">
-                            <li>
-                                <div class="boxed-list-item">
-                                    <!-- Avatar -->
-                                    <div class="item-image">
-                                        <img src="images/browse-companies-03.png" alt="">
-                                    </div>
-
-                                    <!-- Content -->
-                                    <div class="item-content">
-                                        <h4>Development Team Leader</h4>
-                                        <div class="item-details margin-top-7">
-                                            <div class="detail-item"><a href="#"><i
-                                                        class="icon-material-outline-business"></i> Acodia</a></div>
-                                            <div class="detail-item"><i class="icon-material-outline-date-range"></i> May
-                                                2019 -
-                                                Present</div>
-                                        </div>
-                                        <div class="item-description">
-                                            <p>Focus the team on the tasks at hand or the internal and external customer
-                                                requirements.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="boxed-list-item">
-                                    <!-- Avatar -->
-                                    <div class="item-image">
-                                        <img src="images/browse-companies-04.png" alt="">
-                                    </div>
-
-                                    <!-- Content -->
-                                    <div class="item-content">
-                                        <h4><a href="#">Lead UX/UI Designer</a></h4>
-                                        <div class="item-details margin-top-7">
-                                            <div class="detail-item"><a href="#"><i
-                                                        class="icon-material-outline-business"></i> Acorta</a></div>
-                                            <div class="detail-item"><i class="icon-material-outline-date-range"></i> April
-                                                2014
-                                                - May 2019</div>
-                                        </div>
-                                        <div class="item-description">
-                                            <p>I designed and implemented 10+ custom web-based CRMs, workflow systems,
-                                                payment
-                                                solutions and mobile apps.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- Boxed List / End -->
 
                 </div>
 
@@ -240,8 +145,7 @@
                         </div>
 
                         <!-- Button -->
-                        <a href="#small-dialog" class="apply-now-button popup-with-zoom-anim margin-bottom-50">Proposer
-                            une mission
+                        <a href="#small-dialog" class="apply-now-button popup-with-zoom-anim margin-bottom-50">Laisser un commentaire
                             <i class="icon-material-outline-arrow-right-alt"></i></a>
 
                         <!-- Freelancer Indicators -->
@@ -267,23 +171,23 @@
                         </div>
 
                         <!-- Widget
-                                <div class="sidebar-widget">
-                                    <h3>Réseaux sociaux</h3>
-                                    <div class="freelancer-socials margin-top-25">
-                                        <ul>
-                                            <li><a href="#" title="Dribbble" data-tippy-placement="top"><i
-                                                        class="icon-brand-dribbble"></i></a></li>
-                                            <li><a href="#" title="Twitter" data-tippy-placement="top"><i
-                                                        class="icon-brand-twitter"></i></a></li>
-                                            <li><a href="#" title="Behance" data-tippy-placement="top"><i
-                                                        class="icon-brand-behance"></i></a></li>
-                                            <li><a href="#" title="GitHub" data-tippy-placement="top"><i
-                                                        class="icon-brand-github"></i></a></li>
+                                                                <div class="sidebar-widget">
+                                                                    <h3>Réseaux sociaux</h3>
+                                                                    <div class="freelancer-socials margin-top-25">
+                                                                        <ul>
+                                                                            <li><a href="#" title="Dribbble" data-tippy-placement="top"><i
+                                                                                        class="icon-brand-dribbble"></i></a></li>
+                                                                            <li><a href="#" title="Twitter" data-tippy-placement="top"><i
+                                                                                        class="icon-brand-twitter"></i></a></li>
+                                                                            <li><a href="#" title="Behance" data-tippy-placement="top"><i
+                                                                                        class="icon-brand-behance"></i></a></li>
+                                                                            <li><a href="#" title="GitHub" data-tippy-placement="top"><i
+                                                                                        class="icon-brand-github"></i></a></li>
 
-                                        </ul>
-                                    </div>
-                                </div>
-                                -->
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                                -->
 
 
                         <!-- Widget -->
@@ -320,8 +224,8 @@
 
                         <!-- Sidebar Widget -->
                         <div class="sidebar-widget">
-                      
-                            @livewire('recommend',['user_id' => $item->id])
+
+                            @livewire('recommend', ['user_id' => $item->id])
 
                             <!-- Copy URL -->
                             <div class="copy-url">
@@ -361,4 +265,99 @@
             </div>
         </div>
     @endforeach
+    <!-- Leave a Review Popup
+                                ================================================== -->
+    <div id="small-dialog" class="zoom-anim-dialog mfp-hide dialog-with-tabs">
+
+        <!--Tabs -->
+        <div class="sign-in-form">
+
+            <ul class="popup-tabs-nav">
+                <li><a href="#tab">Laisser un commentaire</a></li>
+            </ul>
+
+            <div class="popup-tabs-container">
+
+                <!-- Tab -->
+                <div class="popup-tab-content" id="tab">
+
+                    <!-- Welcome Text -->
+                    <div class="welcome-text">
+                        <h3>Combien d'étoile pour {{ $freelancer[0]->name }} ?</h3>
+
+                        <!-- Form -->
+                        <form action='{{ route('review.store', $freelancer[0]->name) }}' method="post"
+                            id="leave-company-review-form">
+
+                            @csrf
+                            @method('post')
+                            <!-- Leave Rating -->
+                            <div class="clearfix"></div>
+                            <div class="leave-rating-container">
+                                <div class="leave-rating margin-bottom-5">
+                                    <input type="radio" name="rating" id="rating-1" value="1">
+                                    <label for="rating-1" class="icon-material-outline-star"></label>
+                                    <input type="radio" name="rating" id="rating-2" value="2">
+                                    <label for="rating-2" class="icon-material-outline-star"></label>
+                                    <input type="radio" name="rating" id="rating-3" value="3">
+                                    <label for="rating-3" class="icon-material-outline-star"></label>
+                                    <input type="radio" name="rating" id="rating-4" value="4">
+                                    <label for="rating-4" class="icon-material-outline-star"></label>
+                                    <input type="radio" name="rating" id="rating-5" value="5">
+                                    <label for="rating-5" class="icon-material-outline-star"></label>
+                                </div>
+
+                            </div>
+                            <div class="clearfix"></div>
+                            <x-input-error :messages="$errors->get('rating')" class="mt-2" />
+                            <!-- Leave Rating / End-->
+
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="input-with-icon-left"
+                                title="Laisser vide pour ajouter un commentaire de manière anonyme"
+                                data-tippy-placement="bottom">
+                                <i class="icon-material-outline-account-circle"></i>
+                                <input type="text" class="input-text with-border" name="name" id="name"
+                                    placeholder="Votre nom et prénom" value="{{ old('name') }}" />
+                                <x-input-error :messages="$errors->get('name')" class="mt-2" />
+
+                            </div>
+                        </div>
+
+                        <div class="col-xl-12">
+                            <div class="input-with-icon-left">
+                                <i class="icon-material-outline-rate-review"></i>
+                                <input type="text" class="input-text with-border" value="{{ old('title') }}"
+                                    name="title" id="reviewtitle" placeholder="Titre du commentaire" required />
+                                <x-input-error :messages="$errors->get('title')" class="mt-2" />
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <textarea class="with-border" placeholder="Commentaire" value="{{ old('message') }}" name="message" id="message"
+                        cols="7" required></textarea>
+                    <x-input-error :messages="$errors->get('message')" class="mt-2" />
+
+
+
+                    <!-- Button -->
+                    <button class="button margin-top-35 full-width button-sliding-icon ripple-effect" type="submit"
+                        form="leave-company-review-form">Laisser un commentaire <i
+                            class="icon-material-outline-arrow-right-alt"></i></button>
+
+                    </form>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- Leave a Review Popup / End -->
 @endsection

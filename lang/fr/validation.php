@@ -156,6 +156,7 @@ return [
         'budget'=>'budget',
         'tags'=>'tags',
         'content'=>'contenu',
+        'rating'=>'étoile',
 
     ]
 ];

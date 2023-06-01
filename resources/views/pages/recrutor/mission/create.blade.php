@@ -9,7 +9,7 @@
 
 
         <!-- Dashboard Content
-                         ================================================== -->
+                             ================================================== -->
         <div class="dashboard-content-container" data-simplebar>
             <div class="dashboard-content-inner">
 
@@ -67,10 +67,9 @@
                                             <select class="selectpicker with-border" data-size="7"
                                                 title="Choisir une catégorie" name="category" value="{{ old('category') }}">
                                                 @foreach ($categories as $category)
-                                                    
-                                                <option>{{$category}}</option>
+                                                    <option>{{ $category }}</option>
                                                 @endforeach
-                                           
+
                                             </select>
                                         </div>
                                         <x-input-error :messages="$errors->get('category')" class="mt-2" />
@@ -145,8 +144,8 @@
                                     <div class="col-xl-4">
                                         <div class="submit-field">
                                             <h5>Téléphone ( 10 chiffres ) </h5>
-                                            <input type="text" class="with-border" name="phone" placeholder='ex : 0101198482'
-                                                value="{{ old('phone') }}">
+                                            <input type="text" class="with-border" name="phone"
+                                                placeholder='ex : 0101198482' value="{{ old('phone') }}">
 
                                         </div>
                                         <x-input-error :messages="$errors->get('phone')" class="mt-2" />

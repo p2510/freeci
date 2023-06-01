@@ -1,6 +1,6 @@
 @extends('layouts.user')
 @section('title')
-    Freeci - Toutes les missions
+    Freeci - Recherche 
 @endsection
 @section('addTailwind')
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -150,8 +150,6 @@
             });
             inputSkills.value = tagsArr
         })
-
-
 
     </script>
 @endsection

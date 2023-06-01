@@ -24,29 +24,21 @@
             <!-- Search Bar -->
             <div class="row">
                 <div class="col-md-12">
-                    <div class="intro-banner-search-form margin-top-95">
-
-                        <!-- Search Field -->
-                        <div class="intro-search-field with-autocomplete">
-                            <label for="autocomplete-input" class="field-title ripple-effect">Où?</label>
-                            <div class="input-with-icon">
-                                <input id="autocomplete-input" type="text" placeholder="Localisation">
-                                <i class="icon-material-outline-location-on"></i>
-                            </div>
-                        </div>
-
+                    <form action="{{route('search')}}" method="post" class="intro-banner-search-form margin-top-95">
+                        @csrf
+                        @method('post')
                         <!-- Search Field -->
                         <div class="intro-search-field">
                             <label for="intro-keywords" class="field-title ripple-effect">Trouver une mission ?</label>
-                            <input id="intro-keywords" type="text" placeholder="Titre de mission ou mot clé">
+                            <input id="intro-keywords" value="" name="search" type="text" placeholder="Titre de mission | catégorie | mot clé">
                         </div>
 
                         <!-- Button -->
                         <div class="intro-search-button">
-                            <button class="button ripple-effect"
-                                onclick="window.location.href='{{ route('home') }}'">Recherche</button>
+                            <button type='submit' class="button ripple-effect"
+                                >Recherche</button>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
 

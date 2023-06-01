@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\FollowController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\MissionController;
 use App\Http\Controllers\ProfileController;
@@ -24,6 +25,7 @@ use App\Http\Controllers\ApplicantMissionController;
 */
 
 Route::get('/', [HomeController::class, '__invoke'])->name('home');
+Route::post('/recherche', [HomeController::class, 'search'])->name('search');
 
 // for missions
 Route::prefix('/mission')->group(function () {
@@ -55,9 +57,6 @@ Route::prefix('/messagerie-mission')->group(function () {
         Route::post('/', [MessageController::class, 'store_recrutor'])->name('message.store.recrutor');
 });
 
-
-    
-
 // for freelancers
 Route::prefix('freelancer')->group(function () {
     Route::get('/', [FreelancerController::class, 'index'])->name('freelancer.index');
@@ -83,6 +82,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/messagerie/{mission}', [MessageController::class, 'show'])->name('message.show.freelancer');
     Route::post('/messagerie', [MessageController::class, 'store_freelancer'])->name('message.store.freelancer');
 
+
+     // reviews 
+
+    Route::post('ajouter-commentaire/{user}', [ReviewController::class, 'store'])->name('review.store');
 
      
      // online gateway 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\View;
+use App\Models\Review;
 use App\Http\Utils\Listing;
 use App\Models\Recommended;
 use Illuminate\Http\Request;
@@ -97,7 +98,8 @@ class FreelancerController extends Controller
                    
         return view('pages.user.freelancer-show')->with([
             'freelancer'=>$freelancer,
-            'countRecommended'=>$countRecommended
+            'countRecommended'=>$countRecommended,
+            'reviews'=>Review::where('user_id',$user->id)->orderBy('rating','desc')->latest()->limit(3)->get()
         ]);
     }
 
