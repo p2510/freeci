@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\View;
+use App\Models\Review;
 use App\Models\Recommended;
 use Illuminate\Support\Arr;
 use App\Models\Subscription;
 use Illuminate\Http\Request;
+use App\Models\MissionApplicant;
 use App\Models\SubscriptionCode;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -22,6 +24,10 @@ class DashboardController extends Controller
         $subscriptionInfo=Subscription::where('user_id',Auth::user()->id)->get();
          // get count recommended
         $recommended=Recommended::where('user_id',Auth::user()->id)->count();
+        // get count reviews
+        $review=Review::where('user_id',Auth::user()->id)->count();
+        // get count missions
+        $mission=MissionApplicant::where('user_id',Auth::user()->id)->where('accepted',1)->count();
          // get count views
         $views= View::where('user_id',Auth::user()->id)->whereYear('created_at',date('Y'))->get('created_at')->toArray();
         $views=array_count_values(Arr::flatten($views));
@@ -38,7 +44,9 @@ class DashboardController extends Controller
             'subscriptionInfo'=>$subscriptionInfo,
             'recommended'=> $recommended,
             'views'=>implode(',',$dataViews),
-            'invoices'=>$invoices
+            'invoices'=>$invoices,
+            'review'=>$review,
+            'mission'=>$mission
             
         ]);
     }

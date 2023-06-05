@@ -5,9 +5,21 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Review;
 use Illuminate\Http\Request;
+use App\Notifications\NewReview;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 
 class ReviewController extends Controller
 {
+    public function index()
+    {
+
+        return view('pages.freelancer.review.index')->with([
+            'reviews'=>Review::where('user_id',Auth::user()->id)->latest()->paginate(3)
+        ]);
+    }
+    
+
     public function store(Request $request,User $user)
     {
        $validate=$request->validate([
@@ -20,9 +32,11 @@ class ReviewController extends Controller
        Review::create($validate);
        
        session()->flash('success','success');
+       Notification::send($user, new NewReview($request->name));
        
        return redirect()->back();
     }
+
 
     
 }

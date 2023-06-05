@@ -9,6 +9,8 @@
     <title>@yield('title')</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    @yield('addTailwind')
+
     <!-- CSS
 ================================================== -->
     <link rel="stylesheet" href="{{ asset('app-assets/css/style.css') }}">
@@ -43,15 +45,15 @@
                         <!-- Main Navigation -->
                         <nav id="navigation">
                             <ul id="responsive">
-                                <li><a href="#">Embauchez </a>
+                                <li><a href="#">Embauchez</a>
                                     <ul class="dropdown-nav">
                                         <li><a href="{{ route('mission.create') }}">Publier mission</a></li>
                                         <li><a href="dashboard-post-a-task.html">Publier projet</a></li>
-                                        <li><a href="{{route('follow.search')}}">Codes suivis</a></li>
-                                        <li><a href="{{route('freelancer.index')}}">Les freelancers</a>
+                                        <li><a href="{{ route('follow.search') }}">Codes suivis</a></li>
+                                        <li><a href="{{ route('freelancer.index') }}">Les freelancers</a>
                                             <ul class="dropdown-nav">
-                                                <li><a href="{{route('freelancer.online')}}">En ligne</a></li>
-                                                <li><a href="{{route('freelancer.new')}}">les nouveaux</a></li>
+                                                <li><a href="{{ route('freelancer.online') }}">En ligne</a></li>
+                                                <li><a href="{{ route('freelancer.new') }}">les nouveaux</a></li>
                                             </ul>
                                         </li>
                                     </ul>
@@ -62,8 +64,8 @@
                                         <li><a href="single-task-page.html">Grands projets</a></li>
                                         <li><a href="#">Recherche par</a>
                                             <ul class="dropdown-nav">
-                                                <li><a href="{{route('mission.recent')}}">Plus récents</a></li>
-                                                <li><a href="{{route('mission.featured')}}">En vedette</a></li>
+                                                <li><a href="{{ route('mission.recent') }}">Plus récents</a></li>
+                                                <li><a href="{{ route('mission.featured') }}">En vedette</a></li>
                                             </ul>
                                         </li>
                                     </ul>
@@ -94,6 +96,7 @@
                                     </li>
                                 @endguest
                                 <a href="#" class=" button ripple-effect">Publier une mission</a>
+
 
                             </ul>
                         </nav>
@@ -133,52 +136,19 @@
                                             <div class="header-notifications-scroll" data-simplebar>
                                                 <ul>
                                                     <!-- Notification -->
-                                                    <li class="notifications-not-read">
-                                                        <a href="dashboard-manage-candidates.html">
-                                                            <span class="notification-icon"><i
-                                                                    class="icon-material-outline-group"></i></span>
-                                                            <span class="notification-text">
-                                                                <strong>Michael Shannah</strong> applied for a job <span
-                                                                    class="color">Full Stack Software Engineer</span>
-                                                            </span>
-                                                        </a>
-                                                    </li>
-
-                                                    <!-- Notification -->
-                                                    <li>
-                                                        <a href="dashboard-manage-bidders.html">
-                                                            <span class="notification-icon"><i
-                                                                    class=" icon-material-outline-gavel"></i></span>
-                                                            <span class="notification-text">
-                                                                <strong>Gilbert Allanis</strong> placed a bid on your <span
-                                                                    class="color">iOS App Development</span> project
-                                                            </span>
-                                                        </a>
-                                                    </li>
-
-                                                    <!-- Notification -->
-                                                    <li>
-                                                        <a href="dashboard-manage-jobs.html">
-                                                            <span class="notification-icon"><i
-                                                                    class="icon-material-outline-autorenew"></i></span>
-                                                            <span class="notification-text">
-                                                                Your job listing <span class="color">Full Stack PHP
-                                                                    Developer</span> is expiring.
-                                                            </span>
-                                                        </a>
-                                                    </li>
-
-                                                    <!-- Notification -->
-                                                    <li>
-                                                        <a href="dashboard-manage-candidates.html">
-                                                            <span class="notification-icon"><i
-                                                                    class="icon-material-outline-group"></i></span>
-                                                            <span class="notification-text">
-                                                                <strong>Sindy Forrest</strong> applied for a job <span
-                                                                    class="color">Full Stack Software Engineer</span>
-                                                            </span>
-                                                        </a>
-                                                    </li>
+                                                    @foreach ($notifications as $notification)
+                                                        <li class="notifications-not-read">
+                                                            <a href="dashboard-manage-candidates.html">
+                                                                <span class="notification-icon"><i
+                                                                        class="icon-material-outline-group"></i></span>
+                                                                <span class="notification-text">
+                                                                    <strong>{{ $notification->data['title'] }}</strong>
+                                                                    <span
+                                                                        class="color">{{ $notification->data['description'] }}</span>
+                                                                </span>
+                                                            </a>
+                                                        </li>
+                                                    @endforeach
                                                 </ul>
                                             </div>
                                         </div>
@@ -371,20 +341,23 @@
                                             href="{{ route('dashboard') }}"><i
                                                 class="icon-material-outline-dashboard"></i>
                                             Dashboard</a></li>
-                                    <li @if (Route::currentRouteName() == 'message.index.freelancer') class="active" @endif><a href="{{route('message.index.freelancer')}}"><i
+                                    <li @if (Route::currentRouteName() == 'message.index.freelancer') class="active" @endif><a
+                                            href="{{ route('message.index.freelancer') }}"><i
                                                 class="icon-material-outline-question-answer"></i>
                                             Messagerie</a></li>
-                           
-                                    <li><a href="dashboard-reviews.html"><i
+
+                                    <li @if (Route::currentRouteName() == 'review.index') class="active" @endif><a
+                                            href="{{ route('review.index') }}"><i
                                                 class="icon-material-outline-rate-review"></i>
                                             Commentaire</a></li>
                                 </ul>
 
                                 <ul data-submenu-title="Organiser et gérer">
-                                    <li @if (Route::currentRouteName() == 'applicant.mission.index') class="active" @endif><a href="#"><i class="icon-material-outline-business-center"></i>
+                                    <li @if (Route::currentRouteName() == 'applicant.mission.index') class="active" @endif><a href="#"><i
+                                                class="icon-material-outline-business-center"></i>
                                             Archive</a>
                                         <ul>
-                                            <li><a href="{{route('applicant.mission.index')}}">Missions <span
+                                            <li><a href="{{ route('applicant.mission.index') }}">Missions <span
                                                         class="nav-tag">3</span></a></li>
                                             <li><a href="dashboard-manage-candidates.html">Grands projets</a></li>
                                         </ul>
@@ -422,7 +395,7 @@
 
         </div>
 
-       
+
 
 
         <!-- Footer
@@ -643,13 +616,13 @@
     </script>
     @livewireScripts
 
-    
+
 
     <!-- Google API -->
     <script src="https://maps.googleapis.com/maps/api/js?key=&libraries=places&callback=initAutocomplete"></script>
 
     <!-- Chart.js // documentation: http://www.chartjs.org/docs/latest/ -->
-   
+
 
 
 
