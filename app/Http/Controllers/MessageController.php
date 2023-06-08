@@ -8,8 +8,10 @@ use App\Models\Message;
 use App\Models\Mission;
 use Illuminate\Http\Request;
 use App\Models\MissionApplicant;
+use App\Notifications\NewMessage;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 
 class MessageController extends Controller
 {
@@ -29,6 +31,8 @@ class MessageController extends Controller
                            ->orderBy('created_at','asc')
                            ->get();
       }
+      $user=User::find(Auth::id());
+      $user->unreadNotifications()->update(['read_at' => now()]);
       return view('pages.freelancer.message.index')->with([
          'messages'=>$messages,
          'missions'=>$missions,
@@ -87,6 +91,8 @@ class MessageController extends Controller
       
       Message::create($validate);
 
+      $user=User::find($validate['user_id']);
+      Notification::send($user, new NewMessage());
       return redirect()->back();
       
     }

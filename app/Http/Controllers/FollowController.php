@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Mission;
 use Illuminate\Http\Request;
 use App\Models\MissionApplicant;
 use Illuminate\Support\Facades\DB;
+use App\Notifications\ApplicantAccepted;
+use Illuminate\Support\Facades\Notification;
 
 class FollowController extends Controller
 {
@@ -41,7 +44,7 @@ class FollowController extends Controller
         return view('pages.recrutor.tracking-code.show')->with(['mission'=>$mission,'applicants'=>$applicants]);
     }
 
-    public function accepted(Request $request)
+    public function accepted(Request $request,Mission $mission)
     {
         $validate=$request->validate([
             'user_id'=>['required']
@@ -51,8 +54,11 @@ class FollowController extends Controller
            ->update([
             'accepted'=>'1'
         ]);
+        $user=User::find($validate['user_id']);
+        Notification::send($user, new ApplicantAccepted($mission->title));
+        
            
-           return view('pages.recrutor.tracking-code.accepted');
+        return view('pages.recrutor.tracking-code.accepted')->with(['mission_title'=>$mission->title]);
     }
     
 

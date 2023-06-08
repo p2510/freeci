@@ -7,17 +7,17 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class NewReview extends Notification
+class ApplicantAccepted extends Notification
 {
     use Queueable;
 
     /**
      * Create a new notification instance.
      */
-    public $name;
-    public function __construct(string $name)
+    public $title;
+    public function __construct(string $title)
     {
-        $this->name=$name;
+        $this->title=$title;
     }
 
     /**
@@ -49,9 +49,9 @@ class NewReview extends Notification
     public function toArray(object $notifiable): array
     {
         return [
-            'title'=>'Nouveau commentaire',
-            'description'=>$this->name.' a ajouté un commentaire',
-            'provide'=>'review'
+            'title'=>'Mission décrochée',
+            'description'=>'Votre candidature à la mission '.$this->title.' a été acceptée',
+            'provide'=>'candidacy'
         ];
     }
 }

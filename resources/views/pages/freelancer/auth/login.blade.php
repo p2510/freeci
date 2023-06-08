@@ -10,7 +10,6 @@
 
 				<h2>Devenir freelancer </h2>
 
-
 			</div>
 		</div>
 	</div>

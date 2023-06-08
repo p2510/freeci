@@ -10,6 +10,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FreelancerController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\ApplicantMissionController;
 
@@ -43,11 +44,13 @@ use App\Http\Controllers\ApplicantMissionController;
     // routing follow  missions and messages 
     Route::get('/entrez-code-mission', [FollowController::class, 'create'])->name('follow.search');
     Route::post('/entrez-code-mission', [FollowController::class, 'store'])->name('follow.store');
-    Route::patch('/accepter-mission', [FollowController::class, 'accepted'])->name('follow.accepted');
+    Route::patch('/accepter-mission/{mission}', [FollowController::class, 'accepted'])->name('follow.accepted');
     Route::prefix('/messagerie-mission')->group(function () {
         Route::get('/{mission}', [MessageController::class, 'index_recrutor'])->name('message.index.recrutor');
         Route::post('/', [MessageController::class, 'store_recrutor'])->name('message.store.recrutor');
     });
+   
+   
 
 
     
@@ -115,6 +118,9 @@ use App\Http\Controllers\ApplicantMissionController;
         Route::post('/code-de-validation', [SubscriptionController::class, 'cash_code_validation'])->name('cash.code.validation');
     
         // routing nofications 
+        Route::get('/notification/{id}', [NotificationController::class, 'readNotification'])->name('notifcation.read');
+        Route::get('/notification', [NotificationController::class, 'readAllNotification'])->name('notifcation.readall');
+
         
     });
 

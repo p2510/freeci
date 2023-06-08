@@ -163,7 +163,7 @@
 
 
 
-                    <form action="{{ route('follow.accepted') }}" method="post">
+                    <form action="{{ route('follow.accepted',$mission->title) }}" method="post">
                         @csrf
                         @method('patch')
                         <input type="hidden" value="" name="user_id" class="userId">

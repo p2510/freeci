@@ -18,8 +18,9 @@ class ApplicantMissionController extends Controller
         $datas=DB::table('mission_applicants')
         ->where('mission_applicants.user_id',Auth::user()->id)
         ->join('missions','missions.id','=','mission_applicants.mission_id') 
-        ->select('mission_applicants.budget','mission_applicants.id','mission_applicants.accepted','mission_applicants.mission_id','missions.title')
+        ->select('mission_applicants.budget','mission_applicants.id','mission_applicants.accepted','mission_applicants.mission_id','missions.title','missions.phone')
         ->get();
+ 
         return view('pages.freelancer.mission.index')->with([
         'datas'=>$datas
         ]);

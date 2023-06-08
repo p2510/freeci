@@ -47,12 +47,12 @@
                 <div class="col-md-12">
                     <ul class="intro-stats margin-top-45 hide-under-992px">
                         <li>
-                            <strong class="counter">1,586</strong>
+                            <strong class="counter">{{count($missions)}}</strong>
                             <span>Missions publiées</span>
                         </li>
 
                         <li>
-                            <strong class="counter">100</strong>
+                            <strong class="counter">{{count($freelancers)}}</strong>
                             <span>Freelancers</span>
                         </li>
                     </ul>

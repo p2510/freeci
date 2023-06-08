@@ -55,7 +55,7 @@
                                                     <!-- Details -->
                                                     <div class="job-listing-description">
                                                         <h3 class="job-listing-title"><a
-                                                                href="{{ route('mission.show', $data->title) }}">{{ $data->title }}</a>
+                                                                href="{{ route('mission.show', $data->title) }}">{{ $data->title }} @if ($data->accepted==1) ( Contacter le recruteur : {{$data->phone}} )  @endif</a>
                                                         </h3>
                                                     </div>
                                                 </div>
