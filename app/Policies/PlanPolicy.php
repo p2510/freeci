@@ -28,7 +28,6 @@ class PlanPolicy
     public function freelancerHasSubscriptionExpert()
     {
         $user=Subscription::where('user_id',Auth::id())->first();
-        
-        return  $user->plan==='pro' &&  $user->estimate>=1;
+        return  $user->plan==='expert' &&  $user->estimate>=1;
     }
 }
