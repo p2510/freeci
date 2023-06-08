@@ -457,15 +457,8 @@
                         </div>
 
                         <!-- Newsletter -->
-                        <div class="col-xl-4 col-lg-4 col-md-12">
-                            <h3><i class="icon-feather-mail"></i> Inscrivez-vous à une newsletter</h3>
-                            <p>Dernières nouvelles hebdomadaires, analyses et conseils de pointe sur la recherche
-                                d'emploi.</p>
-                            <form action="#" method="get" class="newsletter">
-                                <input type="text" name="fname" placeholder="Votre E-mail">
-                                <button type="submit"><i class="icon-feather-arrow-right"></i></button>
-                            </form>
-                        </div>
+                        @livewire('subscription-newsletter')
+
                     </div>
                 </div>
             </div>

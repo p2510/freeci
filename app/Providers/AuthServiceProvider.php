@@ -22,8 +22,8 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Gate::define('is-pro', [PlanPolicy::class, 'freelancerHasSubscriptionPro']);
-        Gate::define('is-expert', [PlanPolicy::class, 'freelancerHasSubscriptionExpert']);
+        Gate::define('check-pro', [PlanPolicy::class, 'freelancerHasSubscriptionPro']);
+        Gate::define('check-expert', [PlanPolicy::class, 'freelancerHasSubscriptionExpert']);
      
     }
 }

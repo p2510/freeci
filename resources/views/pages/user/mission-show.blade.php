@@ -4,7 +4,7 @@
 @endsection
 @section('content')
     <!-- Titlebar
-                                        ================================================== -->
+                                                                                    ================================================== -->
     <div class="single-page-header" data-background-image="{{ asset('images/mission_background.jpg') }}">
         <div class="container">
             <div class="row">
@@ -35,7 +35,7 @@
     </div>
 
     <!-- Page Content
-                                        ================================================== -->
+                                                                                    ================================================== -->
 
     <div class="container">
         <div class="row">
@@ -75,9 +75,21 @@
                 <!-- phone-->
                 <div class="single-page-section">
                     <h3>Contact récruteur</h3>
-                    <div class="task-tags">
-                        <span> {{$mission->phone}}</span>
-                    </div>
+
+                    @can('check-pro')
+                        <div class="task-tags">
+                            <span> {{ $mission->phone }}</span>
+                        </div>
+                    @elsecan('check-expert')
+                        <div class="task-tags">
+                            <span> {{ $mission->phone }}</span>
+                        </div>
+                    @else
+                        <span>Cette fonctionnalité est accessible aux freelancers pro ou expert</span> <br>
+                        <a href="{{ route('subscription.create', 'pro') }}" class="button ripple-effect">Devenez Pro →</a>
+                    @endcan
+
+
                 </div>
                 <div class="clearfix"></div>
 
@@ -87,43 +99,95 @@
                         <h3><i class="icon-material-outline-group"></i> Les propositions des autres candidats</h3>
                     </div>
 
-                    <ul class="boxed-list-ul">
-                        @foreach ($applicants as $applicant)
-                            <li>
-                                <div class="bid">
-                                    <!-- Avatar -->
-                                    <div class="bids-avatar">
-                                        <div class="freelancer-avatar">
-                                            <div class="verified-badge"></div>
-                                            <a href="{{ route('freelancer.show', $applicant->name) }}">
-                                                @if (is_null($applicant->profil_photo))
-                                                    <img src="{{ asset('images/user_avatar_placeholder.png') }}"
-                                                        alt="Photo de profile de {{ $applicant->name }}">
-                                                @else
-                                                    <img src="{{ asset('storage/profil_photo/' . $applicant->profil_photo) }}"
-                                                        alt="Photo de profile de {{ $applicant->name }}">
-                                                @endif
-                                            </a>
+                    @can('check-pro')
+                        <ul class="boxed-list-ul">
+                            @foreach ($applicants as $applicant)
+                                <li>
+                                    <div class="bid">
+                                        <!-- Avatar -->
+                                        <div class="bids-avatar">
+                                            <div class="freelancer-avatar">
+                                                <div class="verified-badge"></div>
+                                                <a href="{{ route('freelancer.show', $applicant->name) }}">
+                                                    @if (is_null($applicant->profil_photo))
+                                                        <img src="{{ asset('images/user_avatar_placeholder.png') }}"
+                                                            alt="Photo de profile de {{ $applicant->name }}">
+                                                    @else
+                                                        <img src="{{ asset('storage/profil_photo/' . $applicant->profil_photo) }}"
+                                                            alt="Photo de profile de {{ $applicant->name }}">
+                                                    @endif
+                                                </a>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <!-- Content -->
-                                    <div class="bids-content">
-                                        <!-- Name -->
-                                        <div class="freelancer-name">
-                                            <h4>{{ $applicant->name }}</h4>
+                                        <!-- Content -->
+                                        <div class="bids-content">
+                                            <!-- Name -->
+                                            <div class="freelancer-name">
+                                                <h4>{{ $applicant->name }}</h4>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <!-- Bid -->
-                                    <div class="bids-bid">
-                                        <div class="bid-rate">
-                                            <div class="rate">{{ $applicant->budget }} F</div>
+                                        <!-- Bid -->
+                                        <div class="bids-bid">
+                                            <div class="bid-rate">
+                                                <div class="rate">{{ $applicant->budget }} F</div>
 
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                </li>
+                            @endforeach
+                        </ul>
+                    @elsecan('check-expert')
+                        <ul class="boxed-list-ul">
+                            @foreach ($applicants as $applicant)
+                                <li>
+                                    <div class="bid">
+                                        <!-- Avatar -->
+                                        <div class="bids-avatar">
+                                            <div class="freelancer-avatar">
+                                                <div class="verified-badge"></div>
+                                                <a href="{{ route('freelancer.show', $applicant->name) }}">
+                                                    @if (is_null($applicant->profil_photo))
+                                                        <img src="{{ asset('images/user_avatar_placeholder.png') }}"
+                                                            alt="Photo de profile de {{ $applicant->name }}">
+                                                    @else
+                                                        <img src="{{ asset('storage/profil_photo/' . $applicant->profil_photo) }}"
+                                                            alt="Photo de profile de {{ $applicant->name }}">
+                                                    @endif
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <!-- Content -->
+                                        <div class="bids-content">
+                                            <!-- Name -->
+                                            <div class="freelancer-name">
+                                                <h4>{{ $applicant->name }}</h4>
+                                            </div>
+                                        </div>
+                                        <!-- Bid -->
+                                        <div class="bids-bid">
+                                            <div class="bid-rate">
+                                                <div class="rate">{{ $applicant->budget }} F</div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            @endforeach
+                        </ul>
+                    @else
+                        <ul class="boxed-list-ul">
+
+                            <li>
+                                <span>Cette fonctionnalité est accessible aux freelancers pro ou expert</span> <br>
+                                <a href="{{ route('subscription.create', 'pro') }}" class="button ripple-effect">Devenez Pro
+                                    →</a>
                             </li>
-                        @endforeach
-                    </ul>
+                        </ul>
+                    @endcan
+
+
+
                 </div>
 
             </div>

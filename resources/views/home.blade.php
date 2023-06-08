@@ -374,6 +374,8 @@
                                 <ul class="list-2">
                                     <li>3 Devis</li>
                                     <li>Voir les autres dévis</li>
+                                    <li>Messagerie instantannée</li>
+
                                 </ul>
                             </div>
                             <a href="{{ route('subscription.create', 'basic') }}"

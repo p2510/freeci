@@ -10,14 +10,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    @yield('addTailwind')
-
     <!-- CSS
 ================================================== -->
     <link rel="stylesheet" href="{{ asset('app-assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('app-assets/css/colors/blue.css') }}">
     <link rel="shortcut icon" href="{{ asset('images/icon.png') }}" type="image/x-icon">
-    @livewireStyles
+
+
 </head>
 
 <body>
@@ -44,15 +43,15 @@
                         <!-- Main Navigation -->
                         <nav id="navigation">
                             <ul id="responsive">
-                                <li><a href="#">Embauchez </a>
+                                <li><a href="#">Embauchez</a>
                                     <ul class="dropdown-nav">
                                         <li><a href="{{ route('mission.create') }}">Publier mission</a></li>
                                         <li><a href="dashboard-post-a-task.html">Publier projet</a></li>
-                                        <li><a href="{{route('follow.search')}}">Codes suivis</a></li>
-                                        <li><a href="{{route('freelancer.index')}}">Les freelancers</a>
+                                        <li><a href="{{ route('follow.search') }}">Codes suivis</a></li>
+                                        <li><a href="{{ route('freelancer.index') }}">Les freelancers</a>
                                             <ul class="dropdown-nav">
-                                                <li><a href="{{route('freelancer.online')}}">En ligne</a></li>
-                                                <li><a href="{{route('freelancer.new')}}">les nouveaux</a></li>
+                                                <li><a href="{{ route('freelancer.online') }}">En ligne</a></li>
+                                                <li><a href="{{ route('freelancer.new') }}">les nouveaux</a></li>
                                             </ul>
                                         </li>
                                     </ul>
@@ -63,8 +62,8 @@
                                         <li><a href="single-task-page.html">Grands projets</a></li>
                                         <li><a href="#">Recherche par</a>
                                             <ul class="dropdown-nav">
-                                                <li><a href="{{route('mission.recent')}}">Plus récents</a></li>
-                                                <li><a href="{{route('mission.featured')}}">En vedette</a></li>
+                                                <li><a href="{{ route('mission.recent') }}">Plus récents</a></li>
+                                                <li><a href="{{ route('mission.featured') }}">En vedette</a></li>
                                             </ul>
                                         </li>
                                     </ul>
@@ -94,7 +93,9 @@
                                         </ul>
                                     </li>
                                 @endguest
-                                <a href="{{ route('mission.create') }}" class=" button ripple-effect">Publier une mission</a>
+                                <a href="#" class=" button ripple-effect">Publier une mission</a>
+
+
                             </ul>
                         </nav>
                         <div class="clearfix"></div>
@@ -107,7 +108,59 @@
                     <div class="right-side">
 
                         @auth
-    
+                            <!--  User Notifications -->
+                            <div class="header-widget hide-on-mobile">
+
+                                <!-- Notifications -->
+                                <div class="header-notifications">
+
+                                    <!-- Trigger -->
+                                    <div class="header-notifications-trigger">
+                                        <a href="#"><i
+                                                class="icon-feather-bell"></i><span>{{ count($notifications) }}</span></a>
+                                    </div>
+
+                                    <!-- Dropdown -->
+                                    <div class="header-notifications-dropdown">
+
+                                        <div class="header-notifications-headline">
+                                            <h4>Notifications</h4>
+                                            <button onClick="window.location.href='{{ route('notifcation.readall') }}'"
+                                                class="mark-as-read ripple-effect-dark" title="tout marquer comme lu"
+                                                data-tippy-placement="left">
+                                                <i class="icon-feather-check-square"></i>
+                                            </button>
+                                        </div>
+
+                                        <div class="header-notifications-content">
+                                            <div class="header-notifications-scroll" data-simplebar>
+                                                <ul>
+                                                    <!-- Notification -->
+                                                    @foreach ($notifications as $notification)
+                                                        <li class="notifications-not-read">
+                                                            <a href="{{ route('notifcation.read', $notification->id) }}">
+                                                                <span class="notification-icon"><i
+                                                                        class="icon-material-outline-group"></i></span>
+                                                                <span class="notification-text">
+                                                                    <strong>{{ $notification->data['title'] }}</strong>
+                                                                    <span
+                                                                        class="color">{{ $notification->data['description'] }}</span>
+                                                                </span>
+                                                            </a>
+                                                        </li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+
+                            </div>
+                            <!--  User Notifications / End -->
 
                             <!-- User Menu -->
                             <div class="header-widget">
@@ -140,11 +193,13 @@
                                                     @endif
                                                 </div>
                                                 <div class="user-name">
-                                                    Tom Smith <span>Freelancer</span>
+                                                    {{ Auth::user()->name }} <span>Freelancer</span>
                                                 </div>
                                             </div>
 
                                             <!-- User Status Switcher -->
+
+
                                             @livewire('define-freelancer-visibility')
 
                                         </div>
@@ -191,13 +246,7 @@
 
         </header>
         <div class="clearfix"></div>
-
-
-        @yield('content')
-
-
-
-
+            @yield('content')
         <!-- Footer
 ================================================== -->
         <footer id="footer">
@@ -370,53 +419,7 @@
     <script src="{{ asset('app-assets/js/magnific-popup.min.js') }}"></script>
     <script src="{{ asset('app-assets/js/slick.min.js') }}"></script>
     <script src="{{ asset('app-assets/js/custom.js') }}"></script>
-  
 
-
-
-    <script>
-        // Snackbar for user status switcher
-        $('.toggle-btn-status').click(function() {
-            Snackbar.show({
-                text: 'Votre status a été changé!',
-                pos: 'bottom-center',
-                showAction: false,
-                actionText: "Dismiss",
-                duration: 3000,
-                textColor: '#fff',
-                backgroundColor: '#383838'
-            });
-        });
-    </script>
-
-
-    <!-- Google Autocomplete -->
-    <script>
-        function initAutocomplete() {
-            var options = {
-                types: ['(cities)'],
-                // componentRestrictions: {country: "us"}
-            };
-
-            var input = document.getElementById('autocomplete-input');
-            var autocomplete = new google.maps.places.Autocomplete(input, options);
-        }
-
-        // Autocomplete adjustment for homepage
-        if ($('.intro-banner-search-form')[0]) {
-            setTimeout(function() {
-                $(".pac-container").prependTo(".intro-search-field.with-autocomplete");
-            }, 300);
-        }
-    </script>
-
-
-    @livewireScripts
-
-
-
-    <!-- Google API -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=&libraries=places&callback=initAutocomplete"></script>
 
 </body>
 

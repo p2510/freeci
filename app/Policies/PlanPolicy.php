@@ -3,7 +3,7 @@
 namespace App\Policies;
 
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Subscription;
 
 class PlanPolicy
 {
@@ -16,18 +16,19 @@ class PlanPolicy
     }
 
     /* check if user plan is pro */
-    public function freelancerHasSubscriptionPro()
+    public function freelancerHasSubscriptionPro(User $user)
     {
-        $user=Subscription::where('user_id',Auth::id())->first();
-        
-        return  $user->plan==='pro' &&  $user->estimate>=1;
+        $data=Subscription::where('user_id',$user->id)->first();
+        if (is_null($data)) return  false;
+        return  $data->plan==='pro' &&  $data->estimate>=1;
     }
     
     /* check if user plan is expert */
 
-    public function freelancerHasSubscriptionExpert()
+    public function freelancerHasSubscriptionExpert(User $user)
     {
-        $user=Subscription::where('user_id',Auth::id())->first();
-        return  $user->plan==='expert' &&  $user->estimate>=1;
+        $data=Subscription::where('user_id',$user->id)->first();
+        if (is_null($data)) return  false;
+        return  $data->plan==='expert' &&  $data->estimate>=1;
     }
 }
