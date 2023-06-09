@@ -26,7 +26,7 @@
 				<!-- Welcome Text -->
 				<div class="welcome-text">
 					<h3 style="font-size: 26px;">Créons votre compte !</h3>
-					<span>Vous avez déjà un compte ? <a href="pages-login.html">Connexion !</a></span>
+					<span>Vous avez déjà un compte ? <a href="{{ route('login') }}">Connexion !</a></span>
 				</div>
 
 				<!-- Form -->

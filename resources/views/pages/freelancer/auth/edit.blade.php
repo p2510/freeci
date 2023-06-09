@@ -3,19 +3,17 @@
     Freeci-Paramètre de mon compte
 @endsection
 @section('content')
-    <div class="dashboard-container">
+
 
         <!-- Dashboard Sidebar
-                                                                                                                     ================================================== -->
+                                                                                                                         ================================================== -->
 
         <!-- Dashboard Sidebar / End -->
 
 
         <!-- Dashboard Content
-                                                                                                                     ================================================== -->
-        <div class="dashboard-content-container" data-simplebar>
-            <div class="dashboard-content-inner">
-
+                                                                                                                         ================================================== -->
+    
                 <!-- Dashboard Headline -->
                 <div class="dashboard-headline">
                     <h3>Paramètres</h3>status-information-freelancer
@@ -363,16 +361,11 @@
                 </div>
                 <!-- Row / End -->
 
-                <!-- Footer -->
-                <div class="dashboard-footer-spacer"></div>
 
 
-
-            </div>
-        </div>
         <!-- Dashboard Content / End -->
 
-    </div>
+  
     <script>
         // seed skill 
         let input = document.querySelector('.keyword-input');

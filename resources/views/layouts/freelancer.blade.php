@@ -72,7 +72,7 @@
                                 </li>
                                 <li><a href="#">Comment ça fonctionne</a>
                                     <ul class="dropdown-nav">
-                                        <li><a href="dashboard.html">Tarification</a></li>
+                                        <li><a href="{{route('static.pricing')}}">Tarification</a></li>
                                         <li><a href="dashboard-messages.html">Qui sommes nous ?</a></li>
                                         <li><a href="dashboard-bookmarks.html">Pourquoi Freeci</a></li>
                                         <li><a href="dashboard-reviews.html">Blog</a></li>
@@ -83,7 +83,7 @@
                                                 <li><a href="dashboard-manage-bidders.html">Recruteur</a></li>
                                             </ul>
                                         </li>
-                                        <li><a href="dashboard-settings.html">Support</a></li>
+                                        <li><a href="{{route('static.support')}}">Support</a></li>
 
                                     </ul>
                                 </li>
@@ -118,7 +118,8 @@
 
                                     <!-- Trigger -->
                                     <div class="header-notifications-trigger">
-                                        <a href="#"><i class="icon-feather-bell"></i><span>{{count($notifications)}}</span></a>
+                                        <a href="#"><i
+                                                class="icon-feather-bell"></i><span>{{ count($notifications) }}</span></a>
                                     </div>
 
                                     <!-- Dropdown -->
@@ -126,10 +127,10 @@
 
                                         <div class="header-notifications-headline">
                                             <h4>Notifications</h4>
-                                            <button onClick="window.location.href='{{route('notifcation.readall') }}'" class="mark-as-read ripple-effect-dark" title="tout marquer comme lu"
+                                            <button onClick="window.location.href='{{ route('notifcation.readall') }}'"
+                                                class="mark-as-read ripple-effect-dark" title="tout marquer comme lu"
                                                 data-tippy-placement="left">
-                                                <i
-                                                        class="icon-feather-check-square"></i>
+                                                <i class="icon-feather-check-square"></i>
                                             </button>
                                         </div>
 
@@ -158,7 +159,7 @@
 
                                 </div>
 
-                    
+
 
                             </div>
                             <!--  User Notifications / End -->
@@ -273,7 +274,8 @@
                                     <li @if (Route::currentRouteName() == 'message.index.freelancer') class="active" @endif><a
                                             href="{{ route('message.index.freelancer') }}"><i
                                                 class="icon-material-outline-question-answer"></i>
-                                            Messagerie <span class="nav-tag">{{$countNotificationMessages}}</span></a></li>
+                                            Messagerie <span
+                                                class="nav-tag">{{ $countNotificationMessages }}</span></a></li>
 
                                     <li @if (Route::currentRouteName() == 'review.index') class="active" @endif><a
                                             href="{{ route('review.index') }}"><i
@@ -316,167 +318,49 @@
             </div>
             <div class="dashboard-content-container" data-simplebar>
 
-                @yield('content')
+                <div class="dashboard-content-inner">
+                    @yield('content')
+                    <!-- Footer -->
+                    <div class="dashboard-footer-spacer"></div>
+                    <div class="small-footer margin-top-15">
+                        <div class="small-footer-copyrights">
+                            © {{date('Y')}} <strong>Freeci</strong>. Tous droits réservés.
+                        </div>
+                        <ul class="footer-social-links">
+                            <li>
+                                <a href="#" title="Facebook" data-tippy-placement="top">
+                                    <i class="icon-brand-facebook-f"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" title="Twitter" data-tippy-placement="top">
+                                    <i class="icon-brand-twitter"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" title="Google Plus" data-tippy-placement="top">
+                                    <i class="icon-brand-google-plus-g"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" title="LinkedIn" data-tippy-placement="top">
+                                    <i class="icon-brand-linkedin-in"></i>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <!-- Footer / End -->
+                </div>
+
             </div>
-
-
 
         </div>
 
 
 
 
-        <!-- Footer
-================================================== -->
-        <footer id="footer">
 
-            <!-- Footer Top Section -->
-            <div class="footer-top-section">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xl-12">
-
-                            <!-- Footer Rows Container -->
-                            <div class="footer-rows-container">
-
-                                <!-- Left Side -->
-                                <div class="footer-rows-left">
-                                    <div class="footer-row">
-                                        <div class="footer-row-inner footer-logo">
-                                            <img src="{{ asset('images/logo_white.png') }}" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Right Side -->
-                                <div class="footer-rows-right">
-
-                                    <!-- Social Icons -->
-                                    <div class="footer-row">
-                                        <div class="footer-row-inner">
-                                            <ul class="footer-social-links">
-                                                <li>
-                                                    <a href="#" title="Facebook" data-tippy-placement="bottom"
-                                                        data-tippy-theme="light">
-                                                        <i class="icon-brand-facebook-f"></i>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="#" title="Twitter" data-tippy-placement="bottom"
-                                                        data-tippy-theme="light">
-                                                        <i class="icon-brand-twitter"></i>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="#" title="Google Plus"
-                                                        data-tippy-placement="bottom" data-tippy-theme="light">
-                                                        <i class="icon-brand-google-plus-g"></i>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="#" title="LinkedIn" data-tippy-placement="bottom"
-                                                        data-tippy-theme="light">
-                                                        <i class="icon-brand-linkedin-in"></i>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                            <div class="clearfix"></div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Language Switcher -->
-                                    <div class="footer-row">
-                                        <div class="footer-row-inner">
-                                            <select class="selectpicker language-switcher"
-                                                data-selected-text-format="count" data-size="5">
-                                                <option selected>Français</option>
-                                                <option>English</option>
-
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <!-- Footer Rows Container / End -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Footer Top Section / End -->
-
-            <!-- Footer Middle Section -->
-            <div class="footer-middle-section">
-                <div class="container">
-                    <div class="row">
-
-                        <!-- Links -->
-                        <div class="col-xl-2 col-lg-2 col-md-3">
-                            <div class="footer-links">
-                                <h3>Les recruteurs</h3>
-                                <ul>
-                                    <li><a href="#"><span>Publier mission</span></a></li>
-                                    <li><a href="#"><span>Grand projet</span></a></li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <!-- Links -->
-                        <div class="col-xl-2 col-lg-2 col-md-3">
-                            <div class="footer-links">
-                                <h3>Les freelancers</h3>
-                                <ul>
-                                    <li><a href="#"><span>Les missions</span></a></li>
-                                    <li><a href="#"><span>Grands projets</span></a></li>
-
-                                </ul>
-                            </div>
-                        </div>
-
-                        <!-- Links -->
-                        <div class="col-xl-2 col-lg-2 col-md-3">
-                            <div class="footer-links">
-                                <h3>À propos</h3>
-                                <ul>
-                                    <li><a href="#"><span>Tarification</span></a></li>
-                                    <li><a href="#"><span>Support</span></a></li>
-                                    <li><a href="#"><span>CGV</span></a></li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <!-- Links -->
-                        <div class="col-xl-2 col-lg-2 col-md-3">
-                            <div class="footer-links">
-                                <h3>Mon compte</h3>
-                                <ul>
-                                    <li><a href="#"><span>Me connecter</span></a></li>
-                                    <li><a href="#"><span>Dévenir freelancer</span></a></li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <!-- Newsletter -->
-                        @livewire('subscription-newsletter')
-
-                    </div>
-                </div>
-            </div>
-            <!-- Footer Middle Section / End -->
-
-            <!-- Footer Copyrights -->
-            <div class="footer-bottom-section">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xl-12">
-                            @php echo(date('Y')) @endphp <strong> Freeci </strong>. Tous droits réservés.
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-        </footer>
 
 
     </div>

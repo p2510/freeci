@@ -10,6 +10,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FreelancerController;
+use App\Http\Controllers\StaticPageController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\ApplicantMissionController;
@@ -58,8 +59,11 @@ use App\Http\Controllers\ApplicantMissionController;
 
     Route::get('/', [HomeController::class, '__invoke'])->name('home');
     Route::post('/recherche', [HomeController::class, 'search'])->name('search');
-
-    //roung freelancer 
+    //routing static page
+    Route::get('/tarification', [StaticPageController::class, 'pricing'])->name('static.pricing');
+    Route::get('/support', [StaticPageController::class, 'support'])->name('static.support');
+    Route::post('/support', [StaticPageController::class, 'support_store'])->name('static.support.store');
+    //routing freelancer 
     Route::prefix('freelancer')->group(function () {
         Route::get('/', [FreelancerController::class, 'index'])->name('freelancer.index');
         Route::get('/{user}', [FreelancerController::class, 'show'])->name('freelancer.show');

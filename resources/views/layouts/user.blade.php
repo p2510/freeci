@@ -71,7 +71,7 @@
                                 </li>
                                 <li><a href="#">Comment ça fonctionne</a>
                                     <ul class="dropdown-nav">
-                                        <li><a href="dashboard.html">Tarification</a></li>
+                                        <li><a href="{{route('static.pricing')}}">Tarification</a></li>
                                         <li><a href="dashboard-messages.html">Qui sommes nous ?</a></li>
                                         <li><a href="dashboard-bookmarks.html">Pourquoi Freeci</a></li>
                                         <li><a href="dashboard-reviews.html">Blog</a></li>
@@ -82,7 +82,7 @@
                                                 <li><a href="dashboard-manage-bidders.html">Recruteur</a></li>
                                             </ul>
                                         </li>
-                                        <li><a href="dashboard-settings.html">Support</a></li>
+                                        <li><a href="{{route('static.support')}}">Support</a></li>
 
                                     </ul>
                                 </li>

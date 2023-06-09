@@ -3,12 +3,11 @@
     Freeci- Messagerie
 @endsection
 @section('content')
-    <div class="dashboard-container">
-
+  
 
         <!-- Dashboard Content
                  ================================================== -->
-        <div class="dashboard-content-container" data-simplebar>
+     
             <div class="dashboard-content-inner">
                 <!-- Dashboard Headline -->
                 <div class="dashboard-headline">
@@ -134,8 +133,7 @@
 
 
             </div>
-        </div>
+       
         <!-- Dashboard Content / End -->
 
-    </div>
 @endsection

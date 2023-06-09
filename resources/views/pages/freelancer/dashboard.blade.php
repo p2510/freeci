@@ -5,7 +5,7 @@
 @section('content')
     <!-- Dashboard Container -->
 
-    <div class="dashboard-content-inner">
+
 
         <!-- Dashboard Headline -->
         <div class="dashboard-headline">
@@ -251,12 +251,8 @@
         </div>
         <!-- Row / End -->
 
-        <!-- Footer -->
-        <div class="dashboard-footer-spacer"></div>
 
-        <!-- Footer / End -->
 
-    </div>
 
 
 

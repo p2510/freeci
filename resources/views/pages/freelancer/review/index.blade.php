@@ -8,8 +8,8 @@
 @section('content')
     <!-- Dashboard Content
      ================================================== -->
-    <div class="dashboard-content-container" data-simplebar>
-        <div class="dashboard-content-inner">
+
+
 
             <!-- Dashboard Headline -->
             <div class="dashboard-headline">
@@ -86,7 +86,6 @@
 
 
 
-        </div>
-    </div>
+
     <!-- Dashboard Content / End -->
 @endsection
