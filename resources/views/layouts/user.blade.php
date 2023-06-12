@@ -72,14 +72,13 @@
                                 <li><a href="#">Comment ça fonctionne</a>
                                     <ul class="dropdown-nav">
                                         <li><a href="{{route('static.pricing')}}">Tarification</a></li>
-                                        <li><a href="dashboard-messages.html">Qui sommes nous ?</a></li>
-                                        <li><a href="dashboard-bookmarks.html">Pourquoi Freeci</a></li>
+
                                         <li><a href="dashboard-reviews.html">Blog</a></li>
 
                                         <li><a href="dashboard-manage-tasks.html">Faq</a>
                                             <ul class="dropdown-nav">
-                                                <li><a href="dashboard-manage-tasks.html">Freelancer</a></li>
-                                                <li><a href="dashboard-manage-bidders.html">Recruteur</a></li>
+                                                <li><a href="{{route('static.faq.freelancer')}}">Freelancer</a></li>
+                                                <li><a href="{{route('static.faq.recrutor')}}">Recruteur</a></li>
                                             </ul>
                                         </li>
                                         <li><a href="{{route('static.support')}}">Support</a></li>

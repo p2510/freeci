@@ -10,6 +10,15 @@ class StaticPageController extends Controller
     function pricing()  {
         return view('pages.user.static.pricing-plan');
     }
+
+    function faq_freelancer()  {
+        return view('pages.user.static.faq-freelancer');
+    }
+    
+    function faq_recrutor()  {
+        return view('pages.user.static.faq-recrutor');
+    }
+    
     
     function support()  {
         return view('pages.user.static.support');

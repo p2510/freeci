@@ -71,8 +71,8 @@
                     </div>
                 </div>
                 <div class="clearfix"></div>
-
-                <!-- phone-->
+      
+                <!-- phone
                 <div class="single-page-section">
                     <h3>Contact récruteur</h3>
 
@@ -92,6 +92,7 @@
 
                 </div>
                 <div class="clearfix"></div>
+                -->
 
                 <!-- Freelancers Bidding -->
                 <div class="boxed-list margin-bottom-60">

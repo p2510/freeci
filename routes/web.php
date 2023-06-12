@@ -61,6 +61,8 @@ use App\Http\Controllers\ApplicantMissionController;
     Route::post('/recherche', [HomeController::class, 'search'])->name('search');
     //routing static page
     Route::get('/tarification', [StaticPageController::class, 'pricing'])->name('static.pricing');
+    Route::get('/faq-recruteur', [StaticPageController::class, 'faq_recrutor'])->name('static.faq.recrutor');
+    Route::get('/faq-freelancer', [StaticPageController::class, 'faq_freelancer'])->name('static.faq.freelancer');
     Route::get('/support', [StaticPageController::class, 'support'])->name('static.support');
     Route::post('/support', [StaticPageController::class, 'support_store'])->name('static.support.store');
     //routing freelancer 
