@@ -15,7 +15,7 @@
 ================================================== -->
     <link rel="stylesheet" href="{{ asset('app-assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('app-assets/css/colors/blue.css') }}">
-    <link rel="shortcut icon" href="{{ asset('images/icon.png') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('images/logo.png') }}" type="image/x-png">
     @livewireStyles
 
 

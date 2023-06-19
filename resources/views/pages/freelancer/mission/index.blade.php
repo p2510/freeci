@@ -112,7 +112,6 @@
     </div>
  
 
-
     <!-- Edit Bid Popup
                                     ================================================== -->
     <div id="small-dialog" class="zoom-anim-dialog mfp-hide dialog-with-tabs">
@@ -154,7 +153,6 @@
             </div>
         </div>
     </div>
-
 
     <script>
         let editBtn = document.querySelectorAll('.edit-btn');

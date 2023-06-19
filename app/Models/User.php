@@ -33,6 +33,7 @@ class User extends Authenticatable
         'visibility',
         'email',
         'password',
+  
     ];
 
     /**
@@ -57,6 +58,7 @@ class User extends Authenticatable
     {
         return 'name';
     }
+
 
     public function createdAt(): Attribute
     {

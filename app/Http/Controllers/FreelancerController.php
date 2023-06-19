@@ -8,6 +8,7 @@ use App\Models\Review;
 use App\Http\Utils\Listing;
 use App\Models\Recommended;
 use Illuminate\Http\Request;
+use App\Http\Utils\ShareSocial;
 use Illuminate\Support\Facades\DB;
 
 
@@ -99,7 +100,8 @@ class FreelancerController extends Controller
         return view('pages.user.freelancer-show')->with([
             'freelancer'=>$freelancer,
             'countRecommended'=>$countRecommended,
-            'reviews'=>Review::where('user_id',$user->id)->orderBy('rating','desc')->latest()->limit(3)->get()
+            'reviews'=>Review::where('user_id',$user->id)->orderBy('rating','desc')->latest()->limit(3)->get(),
+            'shareUrl'=>ShareSocial::share(route('freelancer.show',$user->name),$user->name)
         ]);
     }
 

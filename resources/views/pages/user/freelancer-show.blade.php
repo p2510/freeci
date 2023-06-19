@@ -8,7 +8,7 @@
     <!-- alert success -->
 
     <!-- Titlebar
-                                                        ================================================== -->
+                                                            ================================================== -->
     @foreach ($freelancer as $item)
         <div class="single-page-header freelancer-header" data-background-image="images/single-freelancer.jpg">
             <div class="container">
@@ -68,7 +68,7 @@
         @endif
 
         <!-- Page Content
-                                                        ================================================== -->
+                                                            ================================================== -->
         <div class="container">
             <div class="row">
 
@@ -100,7 +100,7 @@
                                                         @if ($review->name)
                                                             {{ $review->name }}
                                                         @else
-                                                        un anonyme
+                                                            un anonyme
                                                         @endif
                                                     </span>
                                                 </h4>
@@ -122,7 +122,7 @@
 
 
                         </ul>
-                 
+
 
 
                     </div>
@@ -145,7 +145,8 @@
                         </div>
 
                         <!-- Button -->
-                        <a href="#small-dialog" class="apply-now-button popup-with-zoom-anim margin-bottom-50">Laisser un commentaire
+                        <a href="#small-dialog" class="apply-now-button popup-with-zoom-anim margin-bottom-50">Laisser un
+                            commentaire
                             <i class="icon-material-outline-arrow-right-alt"></i></a>
 
                         <!-- Freelancer Indicators -->
@@ -171,23 +172,23 @@
                         </div>
 
                         <!-- Widget
-                                                                <div class="sidebar-widget">
-                                                                    <h3>Réseaux sociaux</h3>
-                                                                    <div class="freelancer-socials margin-top-25">
-                                                                        <ul>
-                                                                            <li><a href="#" title="Dribbble" data-tippy-placement="top"><i
-                                                                                        class="icon-brand-dribbble"></i></a></li>
-                                                                            <li><a href="#" title="Twitter" data-tippy-placement="top"><i
-                                                                                        class="icon-brand-twitter"></i></a></li>
-                                                                            <li><a href="#" title="Behance" data-tippy-placement="top"><i
-                                                                                        class="icon-brand-behance"></i></a></li>
-                                                                            <li><a href="#" title="GitHub" data-tippy-placement="top"><i
-                                                                                        class="icon-brand-github"></i></a></li>
+                                                                    <div class="sidebar-widget">
+                                                                        <h3>Réseaux sociaux</h3>
+                                                                        <div class="freelancer-socials margin-top-25">
+                                                                            <ul>
+                                                                                <li><a href="#" title="Dribbble" data-tippy-placement="top"><i
+                                                                                            class="icon-brand-dribbble"></i></a></li>
+                                                                                <li><a href="#" title="Twitter" data-tippy-placement="top"><i
+                                                                                            class="icon-brand-twitter"></i></a></li>
+                                                                                <li><a href="#" title="Behance" data-tippy-placement="top"><i
+                                                                                            class="icon-brand-behance"></i></a></li>
+                                                                                <li><a href="#" title="GitHub" data-tippy-placement="top"><i
+                                                                                            class="icon-brand-github"></i></a></li>
 
-                                                                        </ul>
+                                                                            </ul>
+                                                                        </div>
                                                                     </div>
-                                                                </div>
-                                                                -->
+                                                                    -->
 
 
                         <!-- Widget -->
@@ -242,20 +243,8 @@
                             <div class="share-buttons margin-top-25">
                                 <h3>Partager</h3>
                                 <div class="share-buttons-trigger"><i class="icon-feather-share-2"></i></div>
-                                <div class="share-buttons-content">
-                                    <span>Intéressant? <strong>Partager!</strong></span>
-                                    <ul class="share-buttons-icons">
-                                        <li><a href="#" data-button-color="#3b5998" title="Partager sur Facebook"
-                                                data-tippy-placement="top"><i class="icon-brand-facebook-f"></i></a></li>
-                                        <li><a href="#" data-button-color="#1da1f2" title="Partager sur Twitter"
-                                                data-tippy-placement="top"><i class="icon-brand-twitter"></i></a></li>
-                                        <li><a href="#" data-button-color="#dd4b39"
-                                                title="Partager sur Google Plus" data-tippy-placement="top"><i
-                                                    class="icon-brand-google-plus-g"></i></a></li>
-                                        <li><a href="#" data-button-color="#0077b5" title="Partager sur LinkedIn"
-                                                data-tippy-placement="top"><i class="icon-brand-linkedin-in"></i></a></li>
-                                    </ul>
-                                </div>
+                                <x-social-share :share-url="$shareUrl" />
+
                             </div>
                         </div>
 
@@ -266,7 +255,7 @@
         </div>
     @endforeach
     <!-- Leave a Review Popup
-                                ================================================== -->
+                                    ================================================== -->
     <div id="small-dialog" class="zoom-anim-dialog mfp-hide dialog-with-tabs">
 
         <!--Tabs -->

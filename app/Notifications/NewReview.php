@@ -3,11 +3,12 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Notifications\Notification;
+use App\Http\Utils\ChooseNotifiableChanels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
-use Illuminate\Notifications\Notification;
 
-class NewReview extends Notification
+class NewReview extends Notification implements ShouldQueue
 {
     use Queueable;
 
@@ -27,7 +28,7 @@ class NewReview extends Notification
      */
     public function via(object $notifiable): array
     {
-        return ['database'];
+        return  ChooseNotifiableChanels::channel($notifiable->id);
     }
 
     /**
@@ -36,9 +37,10 @@ class NewReview extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+                    ->gretting('Chers freelancer , ')
+                    ->subject('Freeci - Nouveau commentaire')
+                    ->line('Un utilisateur a envoyé un nouveau commentaire .')
+                    ->action('Voir le commentaire', url('/commentaire'));
     }
 
     /**

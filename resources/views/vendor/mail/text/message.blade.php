@@ -2,7 +2,8 @@
     {{-- Header --}}
     <x-slot:header>
         <x-mail::header :url="config('app.url')">
-            {{ config('app.name') }}
+            <!--{{ config('app.name') }}-->
+            <img src="{{asset('images/logo.png')}}" alt="Le logo de freeci">
         </x-mail::header>
     </x-slot:header>
 
@@ -21,7 +22,7 @@
     {{-- Footer --}}
     <x-slot:footer>
         <x-mail::footer>
-            © {{ date('Y') }} {{ config('app.name') }}. @lang('All rights reserved.')
+            © {{ date('Y') }} {{ config('app.name') }}. Tous droits réservés
         </x-mail::footer>
     </x-slot:footer>
 </x-mail::layout>

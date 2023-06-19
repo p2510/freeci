@@ -8,6 +8,7 @@ use App\Models\Mission;
 use App\Http\Utils\Listing;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Cache;
 
 class HomeController extends Controller
 {
@@ -16,20 +17,26 @@ class HomeController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $freelancers=DB::table('users')
-                     ->join('freelancer_information','freelancer_information.user_id','=','users.id')
-                     ->leftjoin('subscriptions','subscriptions.user_id','=','users.id')
-                     ->select('users.*','freelancer_information.*','subscriptions.plan')
-                     ->get()
-                     ->map(function($item){
-                        $item->created_at=Carbon::parse($item->created_at)->locale('FR_fr')->diffForHumans();
-                        return $item;
-                       }); 
-        $missions=Mission::orderBy('created_at','desc')
-                    ->take(6)
-                    ->get(); 
-
-
+        
+        
+        $freelancers= Cache::remember('freelancers', now()->addhours(72), function () {
+                        return DB::table('users')
+                                ->join('freelancer_information','freelancer_information.user_id','=','users.id')
+                                ->leftjoin('subscriptions','subscriptions.user_id','=','users.id')
+                                ->select('users.*','freelancer_information.*','subscriptions.plan')
+                                ->get()
+                                ->map(function($item){
+                                $item->created_at=Carbon::parse($item->created_at)->locale('FR_fr')->diffForHumans();
+                                return $item;
+                                });
+                   });
+        $missions=Cache::remember('missions', now()->addhours(24), function () { 
+                        return Mission::orderBy('created_at','desc')
+                            ->take(6)
+                            ->get(); 
+                   });
+                   
+            
         return view('home')->with([
             'freelancers'=>$freelancers,
             'missions'=>$missions,
@@ -43,7 +50,6 @@ class HomeController extends Controller
         if(count($missions)===0 || !$request->filled('search')){
             return redirect()->route('mission.index');
         }
-            
         return view('pages.search.home-search')->with([
            'categories'=>Listing::domain(),
            'missions'=>$missions,

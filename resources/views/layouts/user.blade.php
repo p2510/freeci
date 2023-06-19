@@ -16,7 +16,7 @@
 ================================================== -->
     <link rel="stylesheet" href="{{ asset('app-assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('app-assets/css/colors/blue.css') }}">
-    <link rel="shortcut icon" href="{{ asset('images/icon.png') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('images/logo.png') }}" type="image/x-png">
     @livewireStyles
 </head>
 
@@ -47,7 +47,6 @@
                                 <li><a href="#">Embauchez </a>
                                     <ul class="dropdown-nav">
                                         <li><a href="{{ route('mission.create') }}">Publier mission</a></li>
-                                        <li><a href="dashboard-post-a-task.html">Publier projet</a></li>
                                         <li><a href="{{route('follow.search')}}">Codes suivis</a></li>
                                         <li><a href="{{route('freelancer.index')}}">Les freelancers</a>
                                             <ul class="dropdown-nav">
@@ -57,10 +56,9 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li><a href="#">Trouver des emplois</a>
+                                <li><a href="#">Trouver des missions</a>
                                     <ul class="dropdown-nav">
-                                        <li><a href="{{ route('mission.index') }}">Missions</a></li>
-                                        <li><a href="single-task-page.html">Grands projets</a></li>
+                                        <li><a href="{{ route('mission.index') }}">Toutes les missions</a></li>
                                         <li><a href="#">Recherche par</a>
                                             <ul class="dropdown-nav">
                                                 <li><a href="{{route('mission.recent')}}">Plus récents</a></li>
@@ -214,7 +212,7 @@
                                 <div class="footer-rows-left">
                                     <div class="footer-row">
                                         <div class="footer-row-inner footer-logo">
-                                            <img src="{{ asset('images/logo_white.png') }}" alt="">
+                                            <img src="{{ asset('images/logo.png') }}" alt="le logo de freeci">
                                         </div>
                                     </div>
                                 </div>
@@ -254,18 +252,6 @@
                                             <div class="clearfix"></div>
                                         </div>
                                     </div>
-
-                                    <!-- Language Switcher -->
-                                    <div class="footer-row">
-                                        <div class="footer-row-inner">
-                                            <select class="selectpicker language-switcher"
-                                                data-selected-text-format="count" data-size="5">
-                                                <option selected>Français</option>
-                                                <option>English</option>
-
-                                            </select>
-                                        </div>
-                                    </div>
                                 </div>
 
                             </div>
@@ -286,8 +272,8 @@
                             <div class="footer-links">
                                 <h3>Les recruteurs</h3>
                                 <ul>
-                                    <li><a href="#"><span>Publier mission</span></a></li>
-                                    <li><a href="#"><span>Grand projet</span></a></li>
+                                    <li><a href="{{ route('mission.create') }}"><span>Publier mission</span></a></li>
+                                    <li><a href="{{route('follow.search')}}"><span>Code suivis</span></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -297,8 +283,8 @@
                             <div class="footer-links">
                                 <h3>Les freelancers</h3>
                                 <ul>
-                                    <li><a href="#"><span>Les missions</span></a></li>
-                                    <li><a href="#"><span>Grands projets</span></a></li>
+                                    <li><a href="{{ route('mission.index') }}"><span>Les missions</span></a></li>
+                                    <li><a href="{{ route('mission.recent') }}"><span>Plus récents</span></a></li>
 
                                 </ul>
                             </div>
@@ -309,9 +295,9 @@
                             <div class="footer-links">
                                 <h3>À propos</h3>
                                 <ul>
-                                    <li><a href="#"><span>Tarification</span></a></li>
-                                    <li><a href="#"><span>Support</span></a></li>
-                                    <li><a href="#"><span>CGV</span></a></li>
+                                    <li><a href="{{ route('static.pricing') }}"><span>Tarification</span></a></li>
+                                    <li><a href="{{ route('static.support') }}"><span>Support</span></a></li>
+                              
                                 </ul>
                             </div>
                         </div>
@@ -321,8 +307,8 @@
                             <div class="footer-links">
                                 <h3>Mon compte</h3>
                                 <ul>
-                                    <li><a href="#"><span>Me connecter</span></a></li>
-                                    <li><a href="#"><span>Dévenir freelancer</span></a></li>
+                                    <li><a href="{{ route('login') }}"><span>Me connecter</span></a></li>
+                                    <li><a href="{{ route('register') }}"><span>Dévenir freelancer</span></a></li>
                                 </ul>
                             </div>
                         </div>

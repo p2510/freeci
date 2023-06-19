@@ -416,9 +416,9 @@
                                     <li>Contact recruteur</li>
                                     <li>Missions exclusives</li>
                                     <li>Voir les autres dévis</li>
-                                    <li>Notifications par SMS</li>
                                     <li>Notifications par email</li>
                                     <li>Messagerie instantannée</li>
+                                    <li>Notifications par Whatsapp</li>
                                     <li>Nombre de vues sur votre profil</li>
                                     <li>Bonus du pack : publicité de votre profil</li>
 

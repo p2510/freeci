@@ -47,4 +47,12 @@ class Plan {
             return 8000 ; 
         }
     }
+
+    /** @var $id
+     * return notifiable canal for this plan 
+     * 
+     * */
+    
+
+    
 }

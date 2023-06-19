@@ -10,7 +10,7 @@
         <input type="text" wire:model="email" placeholder="Votre E-mail">
         <button type="submit"><i class="icon-feather-arrow-right"></i></button>
     </form>
-    @if ($status == 1)
+    @if ($status_newsletter == 1)
    
         <div class="alert ">
             <x-alert-success message="Vous êtes désormais abonné!!" />

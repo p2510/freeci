@@ -52,9 +52,9 @@
 				
 				<!-- Social Login -->
 				<div class="social-login-separator"><span>ou</span></div>
-				<div class="social-login-buttons">
-					<button class="facebook-login ripple-effect"><i class="icon-brand-facebook-f"></i> Connexion via Facebook</button>
-					<button class="google-login ripple-effect"><i class="icon-brand-google-plus-g"></i> Connexion via Google+</button>
+				<!-- Password forget-->
+				<div class="welcome-text">
+					<span> <a href="{{route('password.request')}}">J'ai oublié mon mot de passe ?</a></span>
 				</div>
 			</div>
 

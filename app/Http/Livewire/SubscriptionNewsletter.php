@@ -8,7 +8,7 @@ use App\Models\Newsletter;
 class SubscriptionNewsletter extends Component
 {
     public $email;
-    public $status=false;
+    public $status_newsletter =false;
     protected $rules = [
         'email' => ['required','email','unique:App\Models\Newsletter'],
     ];
@@ -19,7 +19,7 @@ class SubscriptionNewsletter extends Component
         Newsletter::create([
             'email'=>$this->email,
         ]);
-        $this->status=true;
+        $this->status_newsletter =true;
         
     }
     

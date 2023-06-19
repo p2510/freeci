@@ -157,7 +157,6 @@ return [
         'tags'=>'tags',
         'content'=>'contenu',
         'rating'=>'étoile',
-        'subject'=>'Sujet',
-
+        'subject'=>'sujet',
     ]
 ];

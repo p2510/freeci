@@ -6,10 +6,12 @@ use App\Models\Mission;
 use App\Http\Utils\Listing;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Http\Utils\ShareSocial;
 use Illuminate\Validation\Rule;
 use App\Models\MissionApplicant;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 
 class MissionController extends Controller
 {
@@ -19,10 +21,13 @@ class MissionController extends Controller
     public function index()
     {
 
+        
+        $missions=Cache::remember('all_missions', now()->addhours(12), function () { 
+            return Mission::orderBy('created_at','desc')->paginate(9);
+        });
         return view('pages.user.mission-index')->with([
             'categories'=>Listing::domain(),
-            'missions'=>Mission::orderBy('created_at','desc')->paginate(9),
- 
+            'missions'=>$missions,
         ]);
     }
     
@@ -108,11 +113,14 @@ class MissionController extends Controller
                         ->join('users','users.id','=','mission_applicants.user_id')
                         ->select('mission_applicants.*','users.name','users.profil_photo')
                         ->get();
-        
+
+
         return view('pages.user.mission-show')->with([
             'mission'=>$mission,
             'applied'=>$applied,
-            'applicants'=>$applicants
+            'applicants'=>$applicants,
+            'shareUrl'=>ShareSocial::share(route('mission.show',$mission->title),$mission->title)
+
         ]);
     }
     /* apply on mission */
