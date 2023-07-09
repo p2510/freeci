@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Category;
 use Illuminate\View\View;
 use App\Http\Utils\Listing;
 use Illuminate\Http\Request;
@@ -24,7 +25,7 @@ class ProfileController extends Controller
         return view('pages.freelancer.auth.edit', [
             'user' => $request->user(),
             'freelancer_information' => FreelancerInformation::find(Auth::user()->id),
-            'domain'=>Listing::Domain()
+            'domain'=>Category::all()
         ]);
     }
 
@@ -35,8 +36,7 @@ class ProfileController extends Controller
     {
         
         $request->user()->fill($request->validated());
-        
-
+ 
         if ($request->user()->isDirty('email')) {
             $request->user()->email_verified_at = null;
         }
@@ -62,6 +62,7 @@ class ProfileController extends Controller
 
     public function edit_freelancer_information(Request $request)
     {
+
         $data=$request->validate([
             'tjm'=>['required','integer'],
             'job'=>['required','string','min:4'],
@@ -70,6 +71,7 @@ class ProfileController extends Controller
             'skills'=>['string'],
             'cv'=>['file','mimes:pdf','max:1024']
         ]);
+
         $fileName='';
         
         if (!is_null($request->file('cv'))) {
@@ -79,9 +81,17 @@ class ProfileController extends Controller
         }
 
         $data['user_id']=Auth::user()->id;
+
         // delete last file 
+        /*
         $getLastFile=FreelancerInformation::where('user_id',$data['user_id'])->get('cv');
-        Storage::delete('public/cv/'.$getLastFile[0]->cv);    
+        dd($getLastFile);
+        Storage::delete('public/cv/'.$getLastFile[0]->cv);
+        */
+        $getLastFile=FreelancerInformation::where('user_id',$data['user_id'])->first();
+        if (!is_null( $getLastFile)) {
+            Storage::delete('public/cv/'.$getLastFile?->cv);
+        }
         // insert or update 
         DB::table('freelancer_information')->upsert(
             $data,

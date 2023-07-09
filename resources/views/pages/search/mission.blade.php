@@ -18,7 +18,7 @@
                         <select class="selectpicker default" data-selected-text-format="count" data-size="7" name="category">
                             <option value="All" selected>Tous</option>
                             @foreach ($categories as $category)
-                                <option>{{ $category }}</option>
+                                <option>{{ $category->name }}</option>
                             @endforeach
                         </select>
                     </div>

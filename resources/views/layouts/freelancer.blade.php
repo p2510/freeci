@@ -48,7 +48,6 @@
                                 <li><a href="#">Embauchez</a>
                                     <ul class="dropdown-nav">
                                         <li><a href="{{ route('mission.create') }}">Publier mission</a></li>
-                                        <li><a href="dashboard-post-a-task.html">Publier projet</a></li>
                                         <li><a href="{{ route('follow.search') }}">Codes suivis</a></li>
                                         <li><a href="{{ route('freelancer.index') }}">Les freelancers</a>
                                             <ul class="dropdown-nav">
@@ -61,7 +60,6 @@
                                 <li><a href="#">Trouver des emplois</a>
                                     <ul class="dropdown-nav">
                                         <li><a href="{{ route('mission.index') }}">Missions</a></li>
-                                        <li><a href="single-task-page.html">Grands projets</a></li>
                                         <li><a href="#">Recherche par</a>
                                             <ul class="dropdown-nav">
                                                 <li><a href="{{ route('mission.recent') }}">Plus récents</a></li>
@@ -73,9 +71,8 @@
                                 <li><a href="#">Comment ça fonctionne</a>
                                     <ul class="dropdown-nav">
                                         <li><a href="{{ route('static.pricing') }}">Tarification</a></li>
-                                        <li><a href="dashboard-reviews.html">Blog</a></li>
 
-                                        <li><a href="dashboard-manage-tasks.html">Faq</a>
+                                        <li><a href="#">Faq</a>
                                             <ul class="dropdown-nav">
                                                 <li><a href="{{ route('static.faq.freelancer') }}">Freelancer</a></li>
                                                 <li><a href="{{ route('static.faq.recrutor') }}">Recruteur</a></li>
@@ -287,7 +284,7 @@
                                             Archive</a>
                                         <ul>
                                             <li><a href="{{ route('applicant.mission.index') }}">Missions </a></li>
-                                            <li><a href="dashboard-manage-candidates.html">Grands projets</a></li>
+                                            
                                         </ul>
                                     </li>
                                     <li @if (Route::currentRouteName() == 'subscription.create') class="active" @endif><a href="#"><i

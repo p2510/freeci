@@ -71,9 +71,8 @@
                                     <ul class="dropdown-nav">
                                         <li><a href="{{route('static.pricing')}}">Tarification</a></li>
 
-                                        <li><a href="dashboard-reviews.html">Blog</a></li>
 
-                                        <li><a href="dashboard-manage-tasks.html">Faq</a>
+                                        <li><a href="#">Faq</a>
                                             <ul class="dropdown-nav">
                                                 <li><a href="{{route('static.faq.freelancer')}}">Freelancer</a></li>
                                                 <li><a href="{{route('static.faq.recrutor')}}">Recruteur</a></li>

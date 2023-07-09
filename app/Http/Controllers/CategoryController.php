@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Mission;
-use App\Http\Utils\Listing;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -15,7 +15,7 @@ class CategoryController extends Controller
     {
         return view('pages.search.mission-by-category')->with([
             'categoryName'=> $category,
-            'categories'=>Listing::domain(),
+            'categories'=>Category::all(),
             'missions'=>Mission::where('category',$category)->orderBy('created_at','desc')->paginate(9)
         ]);
     }

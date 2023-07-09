@@ -249,9 +249,9 @@
                                         <select name="domain" class="selectpicker with-border" data-size="10"
                                             title="Choisir un domaine" data-live-search="true">
                                             @foreach ($domain as $item)
-                                                <option value="{{ $item }}"
-                                                    @if ($freelancer_information) @if ($freelancer_information->domain == $item) selected @endif
-                                                    @endif>{{ $item }}</option>
+                                                <option value="{{ $item->name }}"
+                                                    @if ($freelancer_information) @if ($freelancer_information->domain == $item->name) selected @endif
+                                                    @endif>{{ $item->name }}</option>
                                             @endforeach
 
                                         </select>
@@ -264,8 +264,8 @@
                                     <div class="submit-field">
                                         <h5>Présentez-vous</h5>
                                         <textarea name="description" required cols="30" rows="5" class="with-border">
-@if ($freelancer_information) {{ old('description', $freelancer_information->description) }} @endif
-</textarea>
+                                          @if ($freelancer_information) {{ old('description', $freelancer_information->description) }} @endif
+                                        </textarea>
                                         <x-input-error class="mt-2" :messages="$errors->get('description')" />
                                     </div>
                                 </div>
