@@ -18,7 +18,7 @@ class HomeController extends Controller
     public function __invoke(Request $request)
     {
         
-        
+       
         $freelancers= Cache::remember('freelancers', now()->addhours(72), function () {
                         return DB::table('users')
                                 ->join('freelancer_information','freelancer_information.user_id','=','users.id')
@@ -35,7 +35,6 @@ class HomeController extends Controller
                             ->take(6)
                             ->get(); 
                    });
-                   
             
         return view('home')->with([
             'freelancers'=>$freelancers,

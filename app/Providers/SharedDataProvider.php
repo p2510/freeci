@@ -24,7 +24,7 @@ class SharedDataProvider extends ServiceProvider
     public function boot(): void
     {
    
-        Facades\View::composer(['pages.freelancer.message.*','pages.freelancer.mission.*','pages.freelancer.review.*','pages.freelancer.subscription.*','pages.freelancer.auth.edit','pages.freelancer.dashboard'], function (View $view) {
+        Facades\View::composer(['pages.freelancer.message.*','pages.freelancer.mission.*','pages.freelancer.review.*','pages.freelancer.subscription.*','pages.freelancer.auth.edit','pages.freelancer.dashboard','layouts.error'], function (View $view) {
             $user=User::findOrFail(Auth::id());
             //get notications for this users and shared to global layout 
             $notifications=$user->unreadNotifications; 

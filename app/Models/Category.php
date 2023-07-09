@@ -5,15 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SubscriptionCode extends Model
+class Category extends Model
 {
     use HasFactory;
-    protected $fillable=[
-        'email','code','plan','is_validated'
-    ];
+    protected $fillable=['name'];
     public function getRouteKeyName()
     {
-        return 'code';
+        return 'name';
     }
-
 }

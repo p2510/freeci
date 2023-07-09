@@ -13,7 +13,11 @@ use App\Http\Controllers\FreelancerController;
 use App\Http\Controllers\StaticPageController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\SubscriptionController;
+use App\Http\Controllers\Admin\AdminCodeController;
+use App\Http\Controllers\Admin\AdminHomeController;
 use App\Http\Controllers\ApplicantMissionController;
+use App\Http\Controllers\Admin\AdminCategoryController;
+use App\Http\Controllers\Admin\AdminStatistiqueController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,9 +56,6 @@ use App\Http\Controllers\ApplicantMissionController;
     });
    
    
-
-
-    
 /*ROUTING FOR USER */
 
     Route::get('/', [HomeController::class, '__invoke'])->name('home');
@@ -86,7 +87,6 @@ use App\Http\Controllers\ApplicantMissionController;
     });
 
 
-    
 /*ROUTING FOR FREELANCERS */
 
     Route::middleware('auth')->group(function () {
@@ -130,8 +130,28 @@ use App\Http\Controllers\ApplicantMissionController;
         
     });
 
+/*ROUTING FOR ADMIN*/
 
 
+
+    Route::middleware(['auth','is.admin'])->group(function () {
+        Route::prefix('/admin')->group(function () {
+            Route::get('/', [AdminHomeController::class, '__invoke'])->name('admin.home');
+            // information 
+            Route::get('/statistique', [AdminStatistiqueController::class, '__invoke'])->name('admin.statistique');
+            // gestion
+            Route::get('/liste-code', [AdminCodeController::class, 'index'])->name('admin.code.index');
+            Route::get('/nouveau-code', [AdminCodeController::class, 'create'])->name('admin.code.create');
+            Route::post('/nouveau-code', [AdminCodeController::class, 'store'])->name('admin.code.store');
+            Route::get('/modifier-code/{code}', [AdminCodeController::class, 'edit'])->name('admin.code.edit');
+            Route::patch('/modifier-code/{code}', [AdminCodeController::class, 'update'])->name('admin.code.update');
+            Route::get('/liste-catégorie', [AdminCategoryController::class, 'index'])->name('admin.category.index');
+            Route::get('/catégorie', [AdminCategoryController::class, 'create'])->name('admin.category.create');
+            Route::post('/catégorie', [AdminCategoryController::class, 'store'])->name('admin.category.store');
+            Route::get('/modifier-catégorie/{category}', [AdminCategoryController::class, 'edit'])->name('admin.category.edit');
+            Route::patch('/modifier-catégorie/{category}', [AdminCategoryController::class, 'update'])->name('admin.category.update');
+        });
+    });
 
 
 require __DIR__.'/auth.php';

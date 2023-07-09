@@ -113,7 +113,6 @@
                 <div class="headline">
                     <h3><i class="icon-material-outline-face"></i> Mon profil</h3>
                 </div>
-
                 <div class="content">
                     <ul class="fields-ul">
                         <li>

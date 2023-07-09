@@ -33,7 +33,7 @@ class User extends Authenticatable
         'visibility',
         'email',
         'password',
-  
+        'admin'
     ];
 
     /**

@@ -67,7 +67,7 @@
                                             <select class="selectpicker with-border" data-size="7"
                                                 title="Choisir une catégorie" name="category" value="{{ old('category') }}">
                                                 @foreach ($categories as $category)
-                                                    <option>{{ $category }}</option>
+                                                    <option>{{ $category->name }}</option>
                                                 @endforeach
 
                                             </select>

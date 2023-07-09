@@ -36,7 +36,7 @@
                                         <a href="single-freelancer-profile.html">
                                             @if ($freelancer->profil_photo !== null)
                                                 <img src="{{ asset('storage/profil_photo/' . $freelancer->profil_photo) }}"
-                                                    alt="" title="{{ $freelancer->name }}"
+                                                     title="{{ $freelancer->name }}"
                                                     data-tippy-placement="top"
                                                     alt="Photo de profile de  {{ $freelancer->name }} sur Freeci">
                                             @else

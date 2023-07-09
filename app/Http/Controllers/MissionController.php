@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Mission;
-use App\Http\Utils\Listing;
+use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Utils\ShareSocial;
@@ -26,7 +26,7 @@ class MissionController extends Controller
             return Mission::orderBy('created_at','desc')->paginate(9);
         });
         return view('pages.user.mission-index')->with([
-            'categories'=>Listing::domain(),
+            'categories'=>Category::all(),
             'missions'=>$missions,
         ]);
     }
@@ -46,7 +46,7 @@ class MissionController extends Controller
         }
      
         return view('pages.search.mission')->with([
-            'categories'=>Listing::domain(),
+            'categories'=>Category::all(),
             'missions'=>$data,
         ]);
     }
@@ -55,7 +55,7 @@ class MissionController extends Controller
     {
 
         return view('pages.user.mission-recent')->with([
-            'categories'=>Listing::domain(),
+            'categories'=>Category::all(),
             'missions'=>Mission::orderBy('created_at','desc')->limit(16)->get(),
  
         ]);
@@ -64,7 +64,7 @@ class MissionController extends Controller
     {
    
         return view('pages.user.mission-featured')->with([
-            'categories'=>Listing::domain(),
+            'categories'=>Category::all(),
             'missions'=>Mission::orderBy('budget_max','desc')->limit(16)->get()
  
         ]);
@@ -74,7 +74,7 @@ class MissionController extends Controller
      */
     public function create()
     {
-        $categories=Listing::domain();
+        $categories=Category::all();
         return view('pages.recrutor.mission.create')->with(['categories'=>$categories]);
     }
 

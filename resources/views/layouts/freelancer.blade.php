@@ -72,16 +72,16 @@
                                 </li>
                                 <li><a href="#">Comment ça fonctionne</a>
                                     <ul class="dropdown-nav">
-                                        <li><a href="{{route('static.pricing')}}">Tarification</a></li>
+                                        <li><a href="{{ route('static.pricing') }}">Tarification</a></li>
                                         <li><a href="dashboard-reviews.html">Blog</a></li>
 
                                         <li><a href="dashboard-manage-tasks.html">Faq</a>
                                             <ul class="dropdown-nav">
-                                                <li><a href="{{route('static.faq.freelancer')}}">Freelancer</a></li>
-                                                <li><a href="{{route('static.faq.recrutor')}}">Recruteur</a></li>
+                                                <li><a href="{{ route('static.faq.freelancer') }}">Freelancer</a></li>
+                                                <li><a href="{{ route('static.faq.recrutor') }}">Recruteur</a></li>
                                             </ul>
                                         </li>
-                                        <li><a href="{{route('static.support')}}">Support</a></li>
+                                        <li><a href="{{ route('static.support') }}">Support</a></li>
 
                                     </ul>
                                 </li>
@@ -322,7 +322,7 @@
                     <div class="dashboard-footer-spacer"></div>
                     <div class="small-footer margin-top-15">
                         <div class="small-footer-copyrights">
-                            © {{date('Y')}} <strong>Freeci</strong>. Tous droits réservés.
+                            © {{ date('Y') }} <strong>Freeci</strong>. Tous droits réservés.
                         </div>
                         <ul class="footer-social-links">
                             <li>
